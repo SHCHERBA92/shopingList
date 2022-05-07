@@ -10,4 +10,7 @@ public class Home {
     public String getHomePage(){
         return "index";
     }
+
+
+
 }
