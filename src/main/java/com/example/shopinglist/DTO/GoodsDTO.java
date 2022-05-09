@@ -1,10 +1,10 @@
 package com.example.shopinglist.DTO;
 
-import com.example.shopinglist.models.StatusModel;
+import com.example.shopinglist.models.GlobalSpisokModel;
 
 public class GoodsDTO {
 
     private String name;
 
-    private StatusModel statusModel;
+    private GlobalSpisokModel globalSpisokModel;
 }

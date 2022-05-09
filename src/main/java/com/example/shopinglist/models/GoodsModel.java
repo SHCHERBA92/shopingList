@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -20,6 +21,9 @@ public class GoodsModel {
 
     private String name;
 
+    @Column(name = "status")
+    private RoleOfStatus roleOfStatus = RoleOfStatus.READY_BUY;
+
     @ManyToOne
-    private StatusModel statusModel;
+    private GlobalSpisokModel globalSpisokModel;
 }
