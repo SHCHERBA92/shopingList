@@ -2,12 +2,12 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/shop-line
+    url: jdbc:postgresql://localhost:5432/shope-line_db
+    driver-class-name: org.postgresql.Driver
     username: postgres
     password: root
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
     

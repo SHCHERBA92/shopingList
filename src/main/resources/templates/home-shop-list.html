@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список покупок</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="album py-5 bg-light">
+    <div class="container-fluid">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-sm-3 ">
+
+            <div class="col">
+                <div class="card shadow-sm">
+                    <h5 class="bg-danger rounded-3" align="center">СПИСОК ПОКУПОК</h5>
+                    <div class="card-body">
+
+                        <div class="row bg-danger align-items-center">
+                            <div class="col-sm-2">
+                                <form action="/editNameGood" method="post">
+                                    <button type="submit" class="btn btn-light justify-content-start" ><img src="/images/edit.jpg" alt="редактировать" width="20" height="20"></button>
+                                </form>
+                            </div>
+                            <div class="col-6 align-self-center" >
+                                <h5 class="text-start bg-info">th:text1</h5>
+                            </div>
+                            <div class="col-sm-1">
+                                <form action="/buyGood" method="post">
+                                    <button type="submit" class="btn btn-light"><img src="/images/pngtree-green-check-mark-icon-flat-style-vector-png-image_3057019.jpg" alt="редактировать" width="25" height="25"></button>
+                                </form>
+                            </div>
+                            <div class="col-sm-1">
+                                <form action="/deleteGood" method="post">
+                                    <button type="submit" class="btn btn-light"><img src="/images/free-png.ru-38.png" alt="редактировать" width="25" height="25"></button>
+                                </form>
+                            </div>
+                            <div class="col-sm-1">
+                                <form action="/notFindGood" method="post">
+                                    <button type="submit" class="btn btn-light"><img src="/images/pngtree-green-check-mark-icon-flat-style-vector-png-image_3057019.jpg" alt="редактировать" width="25" height="25"></button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card shadow-sm">
+                    <h5 class="bg-danger rounded-3" align="center">СОВЕРШЕННЫЕ ПОКУПКМ</h5>
+                    <div class="card-body">
+
+                        <div class="row bg-danger align-items-center">
+                            <div class="col-sm-2"></div>
+                            <div class="col-6 align-self-center" >
+                                <h5 class="text-start bg-info">th:text1</h5>
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-1">
+                                <form action="/cancelGood" method="post">
+                                    <button type="submit" class="btn btn-light"><img src="/images/free-png.ru-38.png" alt="редактировать" width="25" height="25"></button>
+                                </form>
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card shadow-sm">
+                    <h5 class="bg-danger rounded-3" align="center">НЕ КУПЛЕННО</h5>
+                    <div class="card-body">
+
+                        <div class="row bg-danger align-items-center">
+                            <div class="col-sm-2"></div>
+                            <div class="col-6 align-self-center" >
+                                <h5 class="text-start bg-info">th:text1</h5>
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-1">
+                                <form action="/cancelGood" method="post">
+                                    <button type="submit" class="btn btn-light"><img src="/images/free-png.ru-38.png" alt="редактировать" width="25" height="25"></button>
+                                </form>
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
