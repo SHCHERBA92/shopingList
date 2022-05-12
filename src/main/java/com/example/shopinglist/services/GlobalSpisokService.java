@@ -15,6 +15,6 @@ public class GlobalSpisokService {
         this.statusRepository = statusRepository;
     }
 
-
+    
 
 }

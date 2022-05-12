@@ -5,13 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -34,6 +32,6 @@ public class GlobalSpisokModel {
     @Column(unique = false, name = "name_shop_list")
     private String nameOfShopList;
 
-    @OneToMany
+    @OneToMany(mappedBy = "globalSpisokModel", fetch = FetchType.LAZY)
     List<GoodsModel> goodsModels;
 }

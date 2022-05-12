@@ -4,11 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.aop.IntroductionAwareMethodMatcher;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Setter
@@ -25,5 +24,6 @@ public class GoodsModel {
     private RoleOfStatus roleOfStatus = RoleOfStatus.READY_BUY;
 
     @ManyToOne
+    @JoinColumn(name = "global_spisok_model_id")
     private GlobalSpisokModel globalSpisokModel;
 }

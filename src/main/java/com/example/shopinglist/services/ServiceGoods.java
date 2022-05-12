@@ -21,14 +21,35 @@ public class ServiceGoods {
         this.statusRepository = statusRepository;
     }
 
+    public void createNewGood(GoodsModel model) {
+        goodsRepository.saveAndFlush(model);
+    }
+
+    public void createNewGood(String name, RoleOfStatus role) {
+        GoodsModel model = new GoodsModel();
+        model.setName(name);
+        model.setRoleOfStatus(role);
+//        model.setGlobalSpisokModel();
+        goodsRepository.saveAndFlush(model);
+    }
+
+    /**
+     * Получаю товар по наименованию
+     * @param name - наименование товара
+     * */
     public GoodsModel getGoodsByName(String name){
         return goodsRepository.findByName(name).orElseThrow(()-> new ExceptionNotElements(NOT_FIND_ELEMENT));
     }
 
+    /**Получаю все возможные товары*/
     public List<GoodsModel> allGoods(){
         return goodsRepository.findAll();
     }
 
+    /**
+     * Получаю товары согласно их статусу
+     * @param role - статус товара
+     * */
     public List<GoodsModel> allGoodsFromRole(RoleOfStatus role){
         return goodsRepository.findByRoleOfStatus(role);
     }
