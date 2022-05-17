@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,18 +16,18 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-sm-3 ">
 
             <div class="col">
-                <div class="card shadow-sm">
-                    <h5 class="bg-danger rounded-3" align="center">СПИСОК ПОКУПОК</h5>
+                <div class="card shadow-sm rounded-3 border-4 border-primary">
+                    <h5 class="rounded-3" align="center">СПИСОК ПОКУПОК</h5>
                     <div class="card-body">
 
-                        <div class="row bg-danger align-items-center">
+                        <div class="row align-items-center">
                             <div class="col-sm-2">
                                 <form action="/editNameGood" method="post">
                                     <button type="submit" class="btn btn-light justify-content-start" ><img src="/images/edit.jpg" alt="редактировать" width="20" height="20"></button>
                                 </form>
                             </div>
                             <div class="col-6 align-self-center" >
-                                <h5 class="text-start bg-info">th:text1</h5>
+                                <h5 class="text-start border-bottom border-2 border-info">th:text1</h5>
                             </div>
                             <div class="col-sm-1">
                                 <form action="/buyGood" method="post">
@@ -36,12 +36,12 @@
                             </div>
                             <div class="col-sm-1">
                                 <form action="/deleteGood" method="post">
-                                    <button type="submit" class="btn btn-light"><img src="/images/free-png.ru-38.png" alt="редактировать" width="25" height="25"></button>
+                                    <button type="submit" class="btn btn-light"><img src="/images/png-transparent-stop-sign-stop-miscellaneous-white-face.png" alt="редактировать" width="25" height="25"></button>
                                 </form>
                             </div>
                             <div class="col-sm-1">
                                 <form action="/notFindGood" method="post">
-                                    <button type="submit" class="btn btn-light"><img src="/images/pngtree-green-check-mark-icon-flat-style-vector-png-image_3057019.jpg" alt="редактировать" width="25" height="25"></button>
+                                    <button type="submit" class="btn btn-light"><img src="/images/free-png.ru-38.png" alt="редактировать" width="25" height="25"></button>
                                 </form>
                             </div>
                         </div>
@@ -51,14 +51,14 @@
             </div>
 
             <div class="col">
-                <div class="card shadow-sm">
-                    <h5 class="bg-danger rounded-3" align="center">СОВЕРШЕННЫЕ ПОКУПКМ</h5>
+                <div class="card shadow-sm rounded-3 border-4 border-success">
+                    <h5 class="rounded-3" align="center">СОВЕРШЕННЫЕ ПОКУПКМ</h5>
                     <div class="card-body">
 
-                        <div class="row bg-danger align-items-center">
+                        <div class="row align-items-center">
                             <div class="col-sm-2"></div>
                             <div class="col-6 align-self-center" >
-                                <h5 class="text-start bg-info">th:text1</h5>
+                                <h5 class="text-start border-bottom border-2 border-info">th:text1</h5>
                             </div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-1">
@@ -74,14 +74,14 @@
             </div>
 
             <div class="col">
-                <div class="card shadow-sm">
-                    <h5 class="bg-danger rounded-3" align="center">НЕ КУПЛЕННО</h5>
+                <div class="card shadow-sm rounded-3 border-4 border-danger">
+                    <h5 class="rounded-3" align="center">НЕ КУПЛЕННО</h5>
                     <div class="card-body">
 
-                        <div class="row bg-danger align-items-center">
+                        <div class="row align-items-center">
                             <div class="col-sm-2"></div>
                             <div class="col-6 align-self-center" >
-                                <h5 class="text-start bg-info">th:text1</h5>
+                                <h5 class="text-start border-bottom border-2 border-info">th:text1</h5>
                             </div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-1">
@@ -98,6 +98,25 @@
 
         </div>
 
+    </div>
+</div>
+
+<!--TODO: Доработать через thym условия появления ошибки-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
     </div>
 </div>
 </body>

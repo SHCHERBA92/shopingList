@@ -16,14 +16,16 @@ import java.util.List;
 @AllArgsConstructor
 public class GoodsModel {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
     @Column(name = "status")
-    private RoleOfStatus roleOfStatus = RoleOfStatus.READY_BUY;
+    @Enumerated(EnumType.STRING)
+    private RoleOfStatus roleOfStatus;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "global_spisok_model_id")
     private GlobalSpisokModel globalSpisokModel;
 }

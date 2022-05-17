@@ -18,6 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class GlobalSpisokModel {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "create_date")
@@ -32,6 +33,6 @@ public class GlobalSpisokModel {
     @Column(unique = false, name = "name_shop_list")
     private String nameOfShopList;
 
-    @OneToMany(mappedBy = "globalSpisokModel", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "globalSpisokModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<GoodsModel> goodsModels;
 }

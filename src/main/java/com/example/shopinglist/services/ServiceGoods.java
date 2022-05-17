@@ -1,6 +1,7 @@
 package com.example.shopinglist.services;
 
 import com.example.shopinglist.exceptions.ExceptionNotElements;
+import com.example.shopinglist.models.GlobalSpisokModel;
 import com.example.shopinglist.models.GoodsModel;
 import com.example.shopinglist.models.RoleOfStatus;
 import com.example.shopinglist.repository.GoodsRepository;
@@ -25,11 +26,11 @@ public class ServiceGoods {
         goodsRepository.saveAndFlush(model);
     }
 
-    public void createNewGood(String name, RoleOfStatus role) {
+    public void createNewGood(String name, GlobalSpisokModel globalSpisokModel) {
         GoodsModel model = new GoodsModel();
         model.setName(name);
-        model.setRoleOfStatus(role);
-//        model.setGlobalSpisokModel();
+        model.setRoleOfStatus(RoleOfStatus.READY_BUY);
+        model.setGlobalSpisokModel(globalSpisokModel);
         goodsRepository.saveAndFlush(model);
     }
 
@@ -52,5 +53,9 @@ public class ServiceGoods {
      * */
     public List<GoodsModel> allGoodsFromRole(RoleOfStatus role){
         return goodsRepository.findByRoleOfStatus(role);
+    }
+
+    public List<GoodsModel> allGoodsFromCurrentShopList(Long id){
+        return goodsRepository.findAllByGlobalSpisokModel_Id(id);
     }
 }
