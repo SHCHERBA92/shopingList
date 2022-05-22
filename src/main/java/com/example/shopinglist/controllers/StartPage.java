@@ -15,6 +15,7 @@ public class StartPage {
     @GetMapping("startPage")
     public String startPage(Model model){
         var allShopSpisok = globalSpisokService.getAllShopSpisok();
+        model.addAttribute("spisokShop", allShopSpisok);
         return "start_page_shopList";
     }
 }

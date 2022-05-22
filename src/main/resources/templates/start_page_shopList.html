@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,32 +19,13 @@
         <span class="fs-5 fw-semibold">List group</span>
     </a>
 
-    <div class="row align-items-center mb-3 border-bottom scrollarea align-self-start">
+    <div class="row align-items-center mb-3 border-bottom scrollarea align-self-start" th:each="spisok: ${spisokShop}">
         <div class="col-md-8">
-            <a href="#" class="list-group-item list-group-item-action active py-3 lh-tight" aria-current="true">
+            <a th:href="@{'shopList/' + ${spisok.getId()}}" class="list-group-item list-group-item-action active py-3 lh-tight" aria-current="true">
                 <div class="d-flex w-100 align-items-center justify-content-between">
-                    <small>Дата создания</small>
-                    <strong class="mb-2">List group item heading</strong>
-                    <small>Дата исполнения</small>
-                </div>
-            </a>
-        </div>
-        <div class="col-6 col-md-2">
-            <button type="button" class="btn btn-info">Редактировать</button>
-        </div>
-        <div class="col-6 col-md-2">
-            <button type="button" class="btn btn-danger">Удалить</button>
-        </div>
-    </div>
-
-
-    <div class="row align-items-center mb-3 border-bottom scrollarea align-self-start">
-        <div class="col-md-8">
-            <a href="#" class="list-group-item list-group-item-action active py-3 lh-tight" aria-current="true">
-                <div class="d-flex w-100 align-items-center justify-content-between">
-                    <small>Wed</small>
-                    <strong class="mb-2">List group item heading</strong>
-                    <small>Wed</small>
+                    <small th:text="${{spisok.getCreateAt()}}">Дата создания</small>
+                    <strong class="mb-2" th:text="${spisok.getNameOfShopList()} + ' ( ' +  ${spisok.getStoreName() + ' ) '}">List group item heading</strong>
+                    <small th:text="${{spisok.getDateTo()}}">Дата исполнения</small>
                 </div>
             </a>
         </div>

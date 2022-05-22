@@ -12,5 +12,6 @@ public interface GoodsRepository extends JpaRepository<GoodsModel, Long> {
     Optional<GoodsModel> findByName(String name);
     List<GoodsModel> findByRoleOfStatus(RoleOfStatus role);
     List<GoodsModel> findAllByGlobalSpisokModel_Id(Long id);
+    List<GoodsModel> findAllByGlobalSpisokModel_IdAndRoleOfStatus(Long id, RoleOfStatus role);
 
 }

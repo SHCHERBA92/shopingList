@@ -55,7 +55,12 @@ public class ServiceGoods {
         return goodsRepository.findByRoleOfStatus(role);
     }
 
+
     public List<GoodsModel> allGoodsFromCurrentShopList(Long id){
         return goodsRepository.findAllByGlobalSpisokModel_Id(id);
+    }
+
+    public List<GoodsModel> allGoodsFromCurrentShopList(Long id, RoleOfStatus role){
+        return goodsRepository.findAllByGlobalSpisokModel_IdAndRoleOfStatus(id,role);
     }
 }

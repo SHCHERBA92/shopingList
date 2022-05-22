@@ -10,15 +10,15 @@
 
 </head>
 <body>
-<div class="album py-5 bg-light">
+<div class="album py-5 bg-light" th:if="${error == null}">
     <div class="container-fluid">
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-sm-3 ">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-sm-3">
 
-            <div class="col">
+            <div class="col" >
                 <div class="card shadow-sm rounded-3 border-4 border-primary">
                     <h5 class="rounded-3" align="center">СПИСОК ПОКУПОК</h5>
-                    <div class="card-body">
+                    <div class="card-body" th:each="goods: ${goodsREADY_BYU}">
 
                         <div class="row align-items-center">
                             <div class="col-sm-2">
@@ -27,7 +27,7 @@
                                 </form>
                             </div>
                             <div class="col-6 align-self-center" >
-                                <h5 class="text-start border-bottom border-2 border-info">th:text1</h5>
+                                <h5 class="text-start border-bottom border-2 border-info" th:text="${goods.getName()}">th:text1</h5>
                             </div>
                             <div class="col-sm-1">
                                 <form action="/buyGood" method="post">
@@ -53,12 +53,12 @@
             <div class="col">
                 <div class="card shadow-sm rounded-3 border-4 border-success">
                     <h5 class="rounded-3" align="center">СОВЕРШЕННЫЕ ПОКУПКМ</h5>
-                    <div class="card-body">
+                    <div class="card-body" th:each="goodsByu: ${goodsBYU}">
 
                         <div class="row align-items-center">
                             <div class="col-sm-2"></div>
                             <div class="col-6 align-self-center" >
-                                <h5 class="text-start border-bottom border-2 border-info">th:text1</h5>
+                                <h5 class="text-start border-bottom border-2 border-info" th:text="${goodsByu.getName()}">th:text1</h5>
                             </div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-1">
@@ -76,12 +76,12 @@
             <div class="col">
                 <div class="card shadow-sm rounded-3 border-4 border-danger">
                     <h5 class="rounded-3" align="center">НЕ КУПЛЕННО</h5>
-                    <div class="card-body">
+                    <div class="card-body" th:each="goodsCancel: ${goodsCANCEL}">
 
                         <div class="row align-items-center">
                             <div class="col-sm-2"></div>
                             <div class="col-6 align-self-center" >
-                                <h5 class="text-start border-bottom border-2 border-info">th:text1</h5>
+                                <h5 class="text-start border-bottom border-2 border-info" th:text="${goodsCancel.getName()}">th:text1</h5>
                             </div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-1">
@@ -101,23 +101,15 @@
     </div>
 </div>
 
-<!--TODO: Доработать через thym условия появления ошибки-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+<!--типа 501 ошибка страница-->
+<div th:unless="${error == null}">
+    <main class="flex-shrink-0">
+        <div class="container">
+            <h1 class="mt-5">ОШИБКА</h1>
+            <p class="lead" th:text="${error}"></p>
         </div>
-    </div>
+    </main>
 </div>
+
 </body>
 </html>
