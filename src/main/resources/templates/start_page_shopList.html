@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стартовая страница</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+<div class="container g-5 bg-white" >
+
+    <a href="/" class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+        <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-5 fw-semibold">List group</span>
+    </a>
+
+    <div class="row align-items-center mb-3 border-bottom scrollarea align-self-start" th:each="spisok: ${spisokShop}">
+        <div class="col-md-8">
+            <a th:href="@{'shopList/' + ${spisok.getId()}}" class="list-group-item list-group-item-action active py-3 lh-tight" aria-current="true">
+                <div class="d-flex w-100 align-items-center justify-content-between">
+                    <small th:text="${{spisok.getCreateAt()}}">Дата создания</small>
+                    <strong class="mb-2" th:text="${spisok.getNameOfShopList()} + ' ( ' +  ${spisok.getStoreName() + ' ) '}">List group item heading</strong>
+                    <small th:text="${{spisok.getDateTo()}}">Дата исполнения</small>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-2">
+            <button type="button" class="btn btn-info">Редактировать</button>
+        </div>
+        <div class="col-6 col-md-2">
+            <button type="button" class="btn btn-danger">Удалить</button>
+        </div>
+    </div>
+
+    <div class="btn-group" role="group" >
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formForNewSpisok" >Добавить</button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="formForNewSpisok" tabindex="-1" aria-labelledby="formForNewSpisokLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formForNewSpisokLabel">Новый список покупок</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="createNewList">
+                        <div class="mb-3">
+                            <label for="ListName" class="form-label">Название списка продуктов</label>
+                            <input type="text" class="form-control" id="ListName" aria-describedby="ListNameHelp" name="listName">
+                            <div id="ListNameHelp" class="form-text">Введите название списка продуктов</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="storeNameLabel" class="form-label">Магазин</label>
+                            <input type="text" class="form-control" id="storeNameLabel" name="storeName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="dateForShoping" class="form-label">Дата совершения покупок</label>
+                            <input type="date" class="form-control" id="dateForShoping" name="dateToShop">
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Сохранить" name="saveNewShopList">
+                        <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

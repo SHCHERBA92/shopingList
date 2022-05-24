@@ -5,13 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -20,6 +18,8 @@ import java.util.Locale;
 @NoArgsConstructor
 public class GlobalSpisokModel {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "GlobalSpisokModel", sequenceName = "GlobalSpisokModel_seq", initialValue = 50)
     private Long id;
 
     @Column(name = "create_date")
@@ -34,6 +34,6 @@ public class GlobalSpisokModel {
     @Column(unique = false, name = "name_shop_list")
     private String nameOfShopList;
 
-    @OneToMany
+    @OneToMany(mappedBy = "globalSpisokModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<GoodsModel> goodsModels;
 }

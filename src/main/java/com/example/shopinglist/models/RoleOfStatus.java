@@ -4,4 +4,8 @@ public enum RoleOfStatus {
     READY_BUY,
     BUY,
     CANCEL;
+
+    RoleOfStatus(){
+
+    }
 }
