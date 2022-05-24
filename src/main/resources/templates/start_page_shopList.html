@@ -50,19 +50,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="/createNewList">
+                    <form method="post" action="createNewList">
                         <div class="mb-3">
                             <label for="ListName" class="form-label">Название списка продуктов</label>
-                            <input type="text" class="form-control" id="ListName" aria-describedby="ListNameHelp">
+                            <input type="text" class="form-control" id="ListName" aria-describedby="ListNameHelp" name="listName">
                             <div id="ListNameHelp" class="form-text">Введите название списка продуктов</div>
                         </div>
                         <div class="mb-3">
                             <label for="storeNameLabel" class="form-label">Магазин</label>
-                            <input type="text" class="form-control" id="storeNameLabel">
+                            <input type="text" class="form-control" id="storeNameLabel" name="storeName">
                         </div>
                         <div class="mb-3">
                             <label for="dateForShoping" class="form-label">Дата совершения покупок</label>
-                            <input type="date" class="form-control" id="dateForShoping">
+                            <input type="date" class="form-control" id="dateForShoping" name="dateToShop">
                         </div>
                         <input type="submit" class="btn btn-primary" value="Сохранить" name="saveNewShopList">
                         <!-- <button type="submit" class="btn btn-primary">Submit</button> -->

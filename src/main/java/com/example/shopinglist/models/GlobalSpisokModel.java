@@ -19,6 +19,7 @@ import java.util.Set;
 public class GlobalSpisokModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "GlobalSpisokModel", sequenceName = "GlobalSpisokModel_seq", initialValue = 50)
     private Long id;
 
     @Column(name = "create_date")
