@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -19,9 +21,12 @@ public class StartPage {
     private final GlobalSpisokService globalSpisokService;
 
     @GetMapping("startPage")
-    public String startPage(Model model){
+    public String startPage(Model model) {
         var allShopSpisok = globalSpisokService.getAllShopSpisok();
+        List<String> tempGoodsForSpisok = new ArrayList<>();
         model.addAttribute("spisokShop", allShopSpisok);
+        model.addAttribute("tempGoodsForSpisok", tempGoodsForSpisok);
+
         return "start_page_shopList";
     }
 
@@ -29,9 +34,9 @@ public class StartPage {
     public String createNewList(@RequestParam String listName,
                                 @RequestParam String storeName,
                                 @RequestParam("dateToShop") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateToShop
-                                ){
+    ) {
         LocalDate localDate = LocalDate.ofInstant(dateToShop.toInstant(), ZoneId.systemDefault());
-        globalSpisokService.addNewSpisok(listName,storeName,localDate);
+        globalSpisokService.addNewSpisok(listName, storeName, localDate);
         return "redirect:/startPage";
     }
 

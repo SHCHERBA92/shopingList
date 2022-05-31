@@ -15,8 +15,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GoodsModel {
+    private final String SEQUENCE_NAME = "sequence_good_model";
+    private final String _NAME = "good_model";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = _NAME, sequenceName = SEQUENCE_NAME, initialValue = 50)
     private Long id;
 
     private String name;

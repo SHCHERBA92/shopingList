@@ -23,8 +23,8 @@ public class GlobalSpisokService {
         return globalSpisokRepository.findAll();
     }
 
-    public void addNewSpisok(String spisokName, String storeName, LocalDate localDate){
-        if (StringUtils.isEmpty(spisokName) || StringUtils.isEmpty(storeName) || localDate == null){
+    public void addNewSpisok(String spisokName, String storeName, LocalDate localDate) {
+        if (StringUtils.isEmpty(spisokName) || StringUtils.isEmpty(storeName) || localDate == null) {
             throw new ExceptionNotElements("");
         }
         GlobalSpisokModel globalSpisokModel = new GlobalSpisokModel();

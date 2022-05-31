@@ -22,10 +22,9 @@ public class HomeShopList {
     private final ServiceGoods serviceGoods;
     private final GlobalSpisokService globalSpisokService;
 
-    //TODO: сделать несколько моделей для списков с разным статусом
     @GetMapping("/{id}")
-    public String getHomePage(@PathVariable Long id, Model model){
-        var goodsList =  serviceGoods.allGoodsFromCurrentShopList(id);
+    public String getHomePage(@PathVariable Long id, Model model) {
+        var goodsList = serviceGoods.allGoodsFromCurrentShopList(id);
         var goodsListREADY_BUY = serviceGoods.allGoodsFromCurrentShopList(id, RoleOfStatus.READY_BUY);
         var goodsListBUY = serviceGoods.allGoodsFromCurrentShopList(id, RoleOfStatus.BUY);
         var goodsListCANCEL = serviceGoods.allGoodsFromCurrentShopList(id, RoleOfStatus.CANCEL);
@@ -33,7 +32,7 @@ public class HomeShopList {
         String error = null;
         try {
             checkGoodsList(goodsList);
-        }catch (ExceptionNotElements elements){
+        } catch (ExceptionNotElements elements) {
             error = elements.getMessage();
         }
         model.addAttribute("error", error);
@@ -45,11 +44,10 @@ public class HomeShopList {
         return "shop-list";
     }
 
-    private void checkGoodsList(List goodsList) throws ExceptionNotElements{
+    private void checkGoodsList(List goodsList) throws ExceptionNotElements {
         if (CollectionUtils.isEmpty(goodsList))
             throw new ExceptionNotElements("Такого списка нет или он пуст");
     }
-
 
 
 }

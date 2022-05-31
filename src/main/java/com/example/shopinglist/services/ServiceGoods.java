@@ -13,13 +13,13 @@ import java.util.List;
 @Service
 public class ServiceGoods {
     private final GoodsRepository goodsRepository;
-    private final GlobalSpisokRepository statusRepository;
+    private final GlobalSpisokRepository globalSpisokRepository;
 
     private final String NOT_FIND_ELEMENT = "Элемента нет в базе данных";
 
-    public ServiceGoods(GoodsRepository goodsRepository, GlobalSpisokRepository statusRepository) {
+    public ServiceGoods(GoodsRepository goodsRepository, GlobalSpisokRepository globalSpisokRepository) {
         this.goodsRepository = goodsRepository;
-        this.statusRepository = statusRepository;
+        this.globalSpisokRepository = globalSpisokRepository;
     }
 
     public void createNewGood(GoodsModel model) {
@@ -34,33 +34,46 @@ public class ServiceGoods {
         goodsRepository.saveAndFlush(model);
     }
 
-    /**
-     * Получаю товар по наименованию
-     * @param name - наименование товара
-     * */
-    public GoodsModel getGoodsByName(String name){
-        return goodsRepository.findByName(name).orElseThrow(()-> new ExceptionNotElements(NOT_FIND_ELEMENT));
+    public void createNewGood(String name, Long id) {
+        GoodsModel model = new GoodsModel();
+        var currentGlobalSpisok = globalSpisokRepository.findById(id).orElseThrow(() -> new ExceptionNotElements(NOT_FIND_ELEMENT));
+        model.setName(name);
+        model.setRoleOfStatus(RoleOfStatus.READY_BUY);
+        model.setGlobalSpisokModel(currentGlobalSpisok);
+        goodsRepository.saveAndFlush(model);
     }
 
-    /**Получаю все возможные товары*/
-    public List<GoodsModel> allGoods(){
+    /**
+     * Получаю товар по наименованию
+     *
+     * @param name - наименование товара
+     */
+    public GoodsModel getGoodsByName(String name) {
+        return goodsRepository.findByName(name).orElseThrow(() -> new ExceptionNotElements(NOT_FIND_ELEMENT));
+    }
+
+    /**
+     * Получаю все возможные товары
+     */
+    public List<GoodsModel> allGoods() {
         return goodsRepository.findAll();
     }
 
     /**
      * Получаю товары согласно их статусу
+     *
      * @param role - статус товара
-     * */
-    public List<GoodsModel> allGoodsFromRole(RoleOfStatus role){
+     */
+    public List<GoodsModel> allGoodsFromRole(RoleOfStatus role) {
         return goodsRepository.findByRoleOfStatus(role);
     }
 
 
-    public List<GoodsModel> allGoodsFromCurrentShopList(Long id){
+    public List<GoodsModel> allGoodsFromCurrentShopList(Long id) {
         return goodsRepository.findAllByGlobalSpisokModel_Id(id);
     }
 
-    public List<GoodsModel> allGoodsFromCurrentShopList(Long id, RoleOfStatus role){
-        return goodsRepository.findAllByGlobalSpisokModel_IdAndRoleOfStatus(id,role);
+    public List<GoodsModel> allGoodsFromCurrentShopList(Long id, RoleOfStatus role) {
+        return goodsRepository.findAllByGlobalSpisokModel_IdAndRoleOfStatus(id, role);
     }
 }

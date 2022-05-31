@@ -30,7 +30,9 @@
             </a>
         </div>
         <div class="col-6 col-md-2">
-            <button type="button" class="btn btn-info">Редактировать</button>
+            <form method="get" th:action="@{'edditSpisok/' + ${spisok.getId()}}">
+                <input type="submit" class="btn btn-info" data-bs-toggle="modal" value="Редактировать">
+            </form>
         </div>
         <div class="col-6 col-md-2">
             <button type="button" class="btn btn-danger">Удалить</button>
