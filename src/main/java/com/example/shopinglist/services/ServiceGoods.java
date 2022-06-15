@@ -76,4 +76,12 @@ public class ServiceGoods {
     public List<GoodsModel> allGoodsFromCurrentShopList(Long id, RoleOfStatus role) {
         return goodsRepository.findAllByGlobalSpisokModel_IdAndRoleOfStatus(id, role);
     }
+
+    public Long deleteGood(Long id){
+        //TODO: сделать проверки на то есть ли такой элемент с таким id в БД
+//        Long idCurrentSpisok = goodsRepository.findByGlobalSpisokModelId(id).get().getId();
+        Long idCurrentSpisok = goodsRepository.findById(id).get().getGlobalSpisokModel().getId();
+        goodsRepository.deleteById(id);
+        return idCurrentSpisok;
+    }
 }

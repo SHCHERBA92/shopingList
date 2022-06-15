@@ -12,18 +12,26 @@ import org.springframework.web.bind.annotation.*;
 public class EdditShopListController {
     private final ServiceGoods serviceGoods;
 
-    @GetMapping("/{id}")
-    public String edditSpisok(@PathVariable Long id, Model model) {
-        var goodsList = serviceGoods.allGoodsFromCurrentShopList(id);
-        model.addAttribute("id", id);
+    @GetMapping("/{idSpisok}")
+    public String edditSpisok(@PathVariable Long idSpisok, Model model) {
+        var goodsList = serviceGoods.allGoodsFromCurrentShopList(idSpisok);
+        model.addAttribute("idSpisok", idSpisok);
         model.addAttribute("allGoods", goodsList);
         return "eddit_shopList";
     }
 
-    @PostMapping("/{id}/newGood")
-    public String addNewGood(@PathVariable Long id, Model model,
+    @PostMapping("/{idSpisok}/newGood")
+    public String addNewGood(@PathVariable Long idSpisok, Model model,
                              @RequestParam String nameGood) {
-        serviceGoods.createNewGood(nameGood, id);
-        return "redirect:/edditSpisok/{id}";
+        serviceGoods.createNewGood(nameGood, idSpisok);
+        return "redirect:/edditSpisok/{idSpisok}";
+    }
+
+    @PostMapping("/{idSpisok}/deleteGood/{idGoods}")
+    public String deleteGood(@PathVariable Long idGoods,
+                             @PathVariable Long idSpisok,
+                             Model model){
+        var f = serviceGoods.deleteGood(idGoods);
+        return "redirect:/edditSpisok/{idSpisok}";
     }
 }

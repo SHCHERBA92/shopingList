@@ -29,7 +29,7 @@ public class GoodsModel {
     @Enumerated(EnumType.STRING)
     private RoleOfStatus roleOfStatus;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "global_spisok_model_id")
     private GlobalSpisokModel globalSpisokModel;
 }

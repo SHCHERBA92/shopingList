@@ -35,7 +35,9 @@
             </form>
         </div>
         <div class="col-6 col-md-2">
-            <button type="button" class="btn btn-danger">Удалить</button>
+            <form method="get" th:action="@{'delete/' + ${spisok.getId()} + '/check'}">
+                <button type="submit" class="btn btn-danger" >Удалить</button>
+            </form>
         </div>
     </div>
 

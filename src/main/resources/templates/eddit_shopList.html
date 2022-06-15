@@ -28,7 +28,7 @@
               </div>
               <div class="col-sm-1"></div>
               <div class="col-sm-1">
-                <form action="/cancelGood" method="post">
+                <form th:action="@{${idSpisok} + '/deleteGood/'+ ${goods.getId()}}" method="post">
                   <button type="submit" class="btn btn-danger" alt="удалить">удалить</button>
                 </form>
               </div>
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="col-sm-1 mt-5">
-          <form th:action="@{${id} + '/newGood'}" method="post">
+          <form th:action="@{${idSpisok} + '/newGood'}" method="post">
             <input type="text" placeholder="Введите название продукта" th:name="nameGood">
             <input type="submit" class="btn btn-success" value="Добавить">
           </form>
