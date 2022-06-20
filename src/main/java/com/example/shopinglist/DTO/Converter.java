@@ -6,15 +6,16 @@ import org.modelmapper.ModelMapper;
 
 public class Converter {
     private final ModelMapper modelMapper;
+
     public Converter() {
         this.modelMapper = new ModelMapper();
     }
 
-    GoodsDTO converterGoodsModelToGoodsDTO(GoodsModel model){
+    GoodsDTO converterGoodsModelToGoodsDTO(GoodsModel model) {
         return modelMapper.map(model, GoodsDTO.class);
     }
 
-    GlobalSpisokDTO converterStatusModelToStatusDTO(GlobalSpisokModel model){
+    GlobalSpisokDTO converterStatusModelToStatusDTO(GlobalSpisokModel model) {
         return modelMapper.map(model, GlobalSpisokDTO.class);
     }
 }
