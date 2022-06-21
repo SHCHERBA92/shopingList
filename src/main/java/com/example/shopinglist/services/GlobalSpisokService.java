@@ -34,12 +34,12 @@ public class GlobalSpisokService {
         globalSpisokRepository.saveAndFlush(globalSpisokModel);
     }
 
-    public GlobalSpisokModel getCurrentSpisok(Long id){
+    public GlobalSpisokModel getCurrentSpisok(Long id) {
         return globalSpisokRepository.findById(id)
-                .orElseThrow( () -> new ExceptionNotElements("Не смогли найти список"));
+                .orElseThrow(() -> new ExceptionNotElements("Не смогли найти список"));
     }
 
-    public void deleteCurrentSpisok(Long id){
+    public void deleteCurrentSpisok(Long id) {
         globalSpisokRepository.deleteById(id);
     }
 

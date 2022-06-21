@@ -36,12 +36,33 @@
 
           </div>
         </div>
+<!--        th:action="@{${idSpisok} + '/newGood'}"-->
         <div class="col-sm-1 mt-5">
-          <form th:action="@{${idSpisok} + '/newGood'}" method="post">
-            <input type="text" placeholder="Введите название продукта" th:name="nameGood">
-            <input type="submit" class="btn btn-success" value="Добавить">
+          <form method="post">
+            <input type="text" placeholder="Введите название продукта" th:name="productName">
+            <input type="submit" class="btn btn-success" value="Найти">
           </form>
         </div>
+<!--/////////-->
+        <div class="card-body"  th:if="${!products.isEmpty()}">
+
+          <div class="row align-items-center" th:each="product: ${products}">
+            <div class="col-sm-2">
+              <img th:src="${product.getImg()}">
+            </div>
+            <div class="col-6 align-self-center" >
+              <h5 class="text-center border-bottom border-2 border-info" th:text="${goods.getName()}">th:text1</h5>
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-1">
+              <form th:action="@{${idSpisok} + '/deleteGood/'+ ${goods.getId()}}" method="post">
+                <button type="submit" class="btn btn-danger" alt="удалить">удалить</button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
       </div>
 
 

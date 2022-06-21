@@ -10,16 +10,19 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class ParsingFromSearch implements ParsingFromApi{
+public class ParsingFromSearch implements ParsingFromApi {
+
     private final String urlApi = "https://www.perekrestok.ru/api/customer/1.4.1.0/catalog/search/all?textQuery=";
     private final String urlSufix = "&entityTypes[]=category&entityTypes[]=product";
+    private String authentication;
+
+    public ParsingFromSearch() {
+        authentication = getAuth();
+    }
 
     @Override
     public Map<String, BigDecimal> getTitleAndObject(String nameQuery) {
@@ -35,9 +38,21 @@ public class ParsingFromSearch implements ParsingFromApi{
             URL url = new URL(strUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.setRequestProperty("auth", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzUxMiJ9.eyJqdGkiOiIxOTkzMjVjYi1jYjg3LTQ2MWMtYmQwNi01MjM1ZjU4OTE5YTYiLCJpYXQiOjE2NTU3NTUxMzgsImV4cCI6MTY1NTc4MzkzOCwiZCI6IjVjMDI0Y2VlLTA3MmEtNDQ4Yy1iYzNkLWU2NmQxOWQwNzg2MiIsImFwaSI6IjEuNC4xLjAiLCJpcCI6Ijk1LjI0LjIwLjE5NSIsInUiOiJkZWIwMzljYy1kMzU0LTQ2ZjctYmVjMC0zYjZlN2ZjODNhMDQiLCJ0IjoxfQ.AV4CzC2xQWDNuenA3I-AjOIzQszT8ce7Sy_k6Hc1YrCa11oEQ5KiYBZFUFVG8fD61fWTuVqpTcWYnvyrgdMm_ymKAYa1y01kG678M0pKEE1FNajkDbdV9hi7kbUUPkkrlTSvuw154ejEv1tBghH_UsB8-EYdn1X8_89D46se_v44WsQ6");
+            connection.setRequestProperty("auth", "Bearer " + authentication);
 
-            if (connection.getResponseCode() <= 299){
+            connection.connect();
+
+            if (connection.getResponseCode() == 401) {
+                this.authentication = this.getAuth();
+
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setRequestProperty("auth", "Bearer " + authentication);
+
+                connection.connect();
+
+            }
+            if (connection.getResponseCode() <= 299) {
                 inputStreamReader = new InputStreamReader(connection.getInputStream());
                 bufferedReader = new BufferedReader(inputStreamReader);
 
@@ -50,7 +65,7 @@ public class ParsingFromSearch implements ParsingFromApi{
                         jsonNode -> {
                             String price = jsonNode.get("medianPrice").asText();
                             StringBuffer stringBuffer = new StringBuffer(price);
-                            stringBuffer.insert(price.length()-2,".");
+                            stringBuffer.insert(price.length() - 2, ".");
                             BigDecimal bigDecimal = new BigDecimal(stringBuffer.toString());
                             return bigDecimal;
                         })
@@ -80,9 +95,21 @@ public class ParsingFromSearch implements ParsingFromApi{
             URL url = new URL(strUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.setRequestProperty("auth", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzUxMiJ9.eyJqdGkiOiIxOTkzMjVjYi1jYjg3LTQ2MWMtYmQwNi01MjM1ZjU4OTE5YTYiLCJpYXQiOjE2NTU3NTUxMzgsImV4cCI6MTY1NTc4MzkzOCwiZCI6IjVjMDI0Y2VlLTA3MmEtNDQ4Yy1iYzNkLWU2NmQxOWQwNzg2MiIsImFwaSI6IjEuNC4xLjAiLCJpcCI6Ijk1LjI0LjIwLjE5NSIsInUiOiJkZWIwMzljYy1kMzU0LTQ2ZjctYmVjMC0zYjZlN2ZjODNhMDQiLCJ0IjoxfQ.AV4CzC2xQWDNuenA3I-AjOIzQszT8ce7Sy_k6Hc1YrCa11oEQ5KiYBZFUFVG8fD61fWTuVqpTcWYnvyrgdMm_ymKAYa1y01kG678M0pKEE1FNajkDbdV9hi7kbUUPkkrlTSvuw154ejEv1tBghH_UsB8-EYdn1X8_89D46se_v44WsQ6");
+            connection.setRequestProperty("auth", "Bearer " + authentication);
 
-            if (connection.getResponseCode() <= 299){
+            connection.connect();
+
+            if (connection.getResponseCode() == 401) {
+                this.authentication = this.getAuth();
+
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setRequestProperty("auth", "Bearer " + authentication);
+
+                connection.connect();
+
+            }
+            if (connection.getResponseCode() <= 299) {
                 inputStreamReader = new InputStreamReader(connection.getInputStream());
                 bufferedReader = new BufferedReader(inputStreamReader);
 
@@ -96,11 +123,11 @@ public class ParsingFromSearch implements ParsingFromApi{
 
                     String price = jsonNode.get("medianPrice").asText();
                     StringBuffer stringBuffer = new StringBuffer(price);
-                    stringBuffer.insert(price.length()-2,".");
+                    stringBuffer.insert(price.length() - 2, ".");
                     BigDecimal bigDecimal = new BigDecimal(stringBuffer.toString());
 
-                    String img = String.format(jsonNode.findValue("image").get("cropUrlTemplate").asText(),"400x400-fit");
-                    return new ProductPars(name,bigDecimal,img);
+                    String img = String.format(jsonNode.findValue("image").get("cropUrlTemplate").asText(), "400x400-fit");
+                    return new ProductPars(name, bigDecimal, img);
                 }).collect(Collectors.toList());
 
             }
@@ -113,6 +140,41 @@ public class ParsingFromSearch implements ParsingFromApi{
             e.printStackTrace();
         }
         return products;
+    }
+
+    public String getAuth() {
+        String strUrl = "https://www.perekrestok.ru/";
+        URL url = null;
+        String authentication = null;
+
+        try {
+            url = new URL(strUrl);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.connect();
+
+            if (httpURLConnection.getResponseCode() <= 299) {
+                var allHeaders =
+                        httpURLConnection.getHeaderFields();
+                var cookies = allHeaders.get("Set-Cookie");
+                var sessionCookie = cookies.stream().filter(s ->
+                        s.contains("session")).findFirst().get();
+                authentication =
+                        Arrays.stream(sessionCookie.replace("session=j%3A%7B%22accessToken%22%3A%22", "!!!!!")
+                                .replace("%22%2C%22refreshToken%22%3A%22", "!!!!!")
+                                .split("!!!!!")).filter(s -> !
+                                s.isEmpty()).collect(Collectors.toList()).get(0);
+            }
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return authentication;
     }
 
 }

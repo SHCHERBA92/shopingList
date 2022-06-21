@@ -77,7 +77,7 @@ public class ServiceGoods {
         return goodsRepository.findAllByGlobalSpisokModel_IdAndRoleOfStatus(id, role);
     }
 
-    public Long deleteGood(Long id){
+    public Long deleteGood(Long id) {
         //TODO: сделать проверки на то есть ли такой элемент с таким id в БД
 //        Long idCurrentSpisok = goodsRepository.findByGlobalSpisokModelId(id).get().getId();
         Long idCurrentSpisok = goodsRepository.findById(id).get().getGlobalSpisokModel().getId();
