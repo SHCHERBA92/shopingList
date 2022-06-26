@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.aop.IntroductionAwareMethodMatcher;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -24,6 +25,10 @@ public class GoodsModel {
     private Long id;
 
     private String name;
+
+    private String img;
+
+    private BigDecimal price;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)

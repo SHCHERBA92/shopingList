@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -23,6 +26,7 @@ public class EdditShopListController {
         var goodsList = serviceGoods.allGoodsFromCurrentShopList(idSpisok);
         model.addAttribute("idSpisok", idSpisok);
         model.addAttribute("allGoods", goodsList);
+        model.addAttribute("products", Collections.EMPTY_LIST);
         return "eddit_shopList";
     }
 
@@ -35,14 +39,16 @@ public class EdditShopListController {
         model.addAttribute("allGoods", goodsList);
         var products = (List<ProductPars>)parsingFromSearch.getListProducts(productName);
         model.addAttribute("products", products);
-        //TODO: отредактировать шаблон
+
         return "eddit_shopList";
     }
 
     @PostMapping("/{idSpisok}/newGood")
     public String addNewGood(@PathVariable Long idSpisok, Model model,
-                             @RequestParam String nameGood) {
-        serviceGoods.createNewGood(nameGood, idSpisok);
+                             @RequestParam String nameProduct,
+                             @RequestParam String imgProduct,
+                             @RequestParam String priceProduct) {
+        serviceGoods.createNewGood(nameProduct, imgProduct, BigDecimal.valueOf(Double.valueOf(priceProduct)), idSpisok);
         return "redirect:/edditSpisok/{idSpisok}";
     }
 

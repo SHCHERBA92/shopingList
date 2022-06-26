@@ -22,11 +22,15 @@
           <div class="card-body"  th:each="goods: ${allGoods}">
 
             <div class="row align-items-center">
-              <div class="col-sm-2"></div>
+              <div class="col-sm-2">
+                <img th:src="${goods.getImg()}" class="img-fluid">
+              </div>
               <div class="col-6 align-self-center" >
                 <h5 class="text-center border-bottom border-2 border-info" th:text="${goods.getName()}">th:text1</h5>
               </div>
-              <div class="col-sm-1"></div>
+              <div class="col-sm-2">
+                <h5 class="text-center border-bottom border-2 border-info" th:text="${goods.getPrice()} + ' &#x20bd'">th:text1</h5>
+              </div>
               <div class="col-sm-1">
                 <form th:action="@{${idSpisok} + '/deleteGood/'+ ${goods.getId()}}" method="post">
                   <button type="submit" class="btn btn-danger" alt="удалить">удалить</button>
@@ -46,17 +50,22 @@
 <!--/////////-->
         <div class="card-body"  th:if="${!products.isEmpty()}">
 
-          <div class="row align-items-center" th:each="product: ${products}">
+          <div class="row align-items-center mt-5" th:each="product: ${products}">
             <div class="col-sm-2">
-              <img th:src="${product.getImg()}">
+              <img th:src="${product.getImg()}" class="img-fluid">
             </div>
             <div class="col-6 align-self-center" >
-              <h5 class="text-center border-bottom border-2 border-info" th:text="${goods.getName()}">th:text1</h5>
+              <h5 class="text-center border-bottom border-2 border-info" th:text="${product.getName()}">th:text1</h5>
             </div>
-            <div class="col-sm-1"></div>
+            <div class="col-sm-2">
+                <h5 class="text-center border-bottom border-2 border-info" th:text="${product.getPrice()} + ' &#x20bd'">th:text1</h5>
+            </div>
             <div class="col-sm-1">
-              <form th:action="@{${idSpisok} + '/deleteGood/'+ ${goods.getId()}}" method="post">
-                <button type="submit" class="btn btn-danger" alt="удалить">удалить</button>
+              <form th:action="@{${idSpisok} + '/newGood'}" method="post">
+                <input type="hidden" th:value="${product.getName()}" name="nameProduct">
+                <input type="hidden" th:value="${product.getImg()}" name="imgProduct">
+                <input type="hidden" th:value="${product.getPrice()}" name="priceProduct">
+                <button type="submit" class="btn btn-success" alt="удалить">добавить</button>
               </form>
             </div>
           </div>

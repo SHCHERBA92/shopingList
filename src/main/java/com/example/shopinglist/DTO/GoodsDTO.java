@@ -8,6 +8,8 @@ public class GoodsDTO {
 
     private String name;
 
+    private String img;
+
     private GlobalSpisokModel globalSpisokModel;
 
     private BigDecimal price;

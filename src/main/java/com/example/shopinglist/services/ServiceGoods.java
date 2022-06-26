@@ -8,6 +8,7 @@ import com.example.shopinglist.repository.GoodsRepository;
 import com.example.shopinglist.repository.GlobalSpisokRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -39,6 +40,17 @@ public class ServiceGoods {
         var currentGlobalSpisok = globalSpisokRepository.findById(id).orElseThrow(() -> new ExceptionNotElements(NOT_FIND_ELEMENT));
         model.setName(name);
         model.setRoleOfStatus(RoleOfStatus.READY_BUY);
+        model.setGlobalSpisokModel(currentGlobalSpisok);
+        goodsRepository.saveAndFlush(model);
+    }
+
+    public void createNewGood(String name, String img, BigDecimal price, Long idSpisok) {
+        GoodsModel model = new GoodsModel();
+        var currentGlobalSpisok = globalSpisokRepository.findById(idSpisok).orElseThrow(() -> new ExceptionNotElements(NOT_FIND_ELEMENT));
+        model.setName(name);
+        model.setRoleOfStatus(RoleOfStatus.READY_BUY);
+        model.setImg(img);
+        model.setPrice(price);
         model.setGlobalSpisokModel(currentGlobalSpisok);
         goodsRepository.saveAndFlush(model);
     }
