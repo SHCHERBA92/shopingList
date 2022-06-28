@@ -25,9 +25,12 @@
               <div class="col-sm-2">
                 <img th:src="${goods.getImg()}" class="img-fluid">
               </div>
-              <div class="col-6 align-self-center" >
+              <div class="col-4 align-self-center" >
                 <h5 class="text-center border-bottom border-2 border-info" th:text="${goods.getName()}">th:text1</h5>
               </div>
+                <div class="col-sm-2">
+                    <h5 class="text-center border-bottom border-2 border-info" th:text="${goods.getCount()} + ' шт.'">th:text1</h5>
+                </div>
               <div class="col-sm-2">
                 <h5 class="text-center border-bottom border-2 border-info" th:text="${goods.getPrice()} + ' &#x20bd'">th:text1</h5>
               </div>
@@ -41,33 +44,40 @@
           </div>
         </div>
 <!--        th:action="@{${idSpisok} + '/newGood'}"-->
-        <div class="col-sm-1 mt-5">
+        <div class="row mt-5">
           <form method="post">
-            <input type="text" placeholder="Введите название продукта" th:name="productName">
-            <input type="submit" class="btn btn-success" value="Найти">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Введите название продукта" th:name="productName">
+              <input type="submit" class="btn btn-success" value="Найти">
+            </div>
           </form>
         </div>
 <!--/////////-->
         <div class="card-body"  th:if="${!products.isEmpty()}">
 
-          <div class="row align-items-center mt-5" th:each="product: ${products}">
-            <div class="col-sm-2">
-              <img th:src="${product.getImg()}" class="img-fluid">
-            </div>
-            <div class="col-6 align-self-center" >
-              <h5 class="text-center border-bottom border-2 border-info" th:text="${product.getName()}">th:text1</h5>
-            </div>
-            <div class="col-sm-2">
-                <h5 class="text-center border-bottom border-2 border-info" th:text="${product.getPrice()} + ' &#x20bd'">th:text1</h5>
-            </div>
-            <div class="col-sm-1">
-              <form th:action="@{${idSpisok} + '/newGood'}" method="post">
+          <div  th:each="product: ${products}">
+            <form th:action="@{${idSpisok} + '/newGood'}" method="post" class="row align-items-center mt-5">
+              <div class="col-sm-2">
+                <img th:src="${product.getImg()}" class="img-fluid">
+              </div>
+              <div class="col-4 align-self-center" >
+                <h5 class="text-center border-bottom border-2 border-info" th:text="${product.getName()}">th:text1</h5>
+              </div>
+              <div class="col-2">
+                <input type="number" value="1" min="1" max="1000" class="form-control w-75" name="countProduct">
+              </div>
+              <div class="col-2">
+                  <h5 class="text-center border-bottom border-2 border-info" th:text="${product.getPrice()} + ' &#x20bd'">th:text1</h5>
+              </div>
+
+              <div class="col-1">
                 <input type="hidden" th:value="${product.getName()}" name="nameProduct">
                 <input type="hidden" th:value="${product.getImg()}" name="imgProduct">
                 <input type="hidden" th:value="${product.getPrice()}" name="priceProduct">
                 <button type="submit" class="btn btn-success" alt="удалить">добавить</button>
-              </form>
-            </div>
+              </div>
+            </form>
+
           </div>
 
         </div>

@@ -30,6 +30,8 @@ public class GoodsModel {
 
     private BigDecimal price;
 
+    private Integer count;
+
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private RoleOfStatus roleOfStatus;

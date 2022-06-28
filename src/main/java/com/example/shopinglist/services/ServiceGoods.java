@@ -44,13 +44,14 @@ public class ServiceGoods {
         goodsRepository.saveAndFlush(model);
     }
 
-    public void createNewGood(String name, String img, BigDecimal price, Long idSpisok) {
+    public void createNewGood(String name, String img, BigDecimal price, Integer count, Long idSpisok) {
         GoodsModel model = new GoodsModel();
         var currentGlobalSpisok = globalSpisokRepository.findById(idSpisok).orElseThrow(() -> new ExceptionNotElements(NOT_FIND_ELEMENT));
         model.setName(name);
         model.setRoleOfStatus(RoleOfStatus.READY_BUY);
         model.setImg(img);
-        model.setPrice(price);
+        model.setPrice(price.multiply(new BigDecimal(count)));
+        model.setCount(count);
         model.setGlobalSpisokModel(currentGlobalSpisok);
         goodsRepository.saveAndFlush(model);
     }

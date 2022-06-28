@@ -47,8 +47,9 @@ public class EdditShopListController {
     public String addNewGood(@PathVariable Long idSpisok, Model model,
                              @RequestParam String nameProduct,
                              @RequestParam String imgProduct,
-                             @RequestParam String priceProduct) {
-        serviceGoods.createNewGood(nameProduct, imgProduct, BigDecimal.valueOf(Double.valueOf(priceProduct)), idSpisok);
+                             @RequestParam String priceProduct,
+                             @RequestParam String countProduct) {
+        serviceGoods.createNewGood(nameProduct, imgProduct, BigDecimal.valueOf(Double.valueOf(priceProduct)),Integer.valueOf(countProduct) , idSpisok);
         return "redirect:/edditSpisok/{idSpisok}";
     }
 
