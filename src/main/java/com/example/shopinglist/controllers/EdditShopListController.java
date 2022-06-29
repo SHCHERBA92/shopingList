@@ -2,6 +2,7 @@ package com.example.shopinglist.controllers;
 
 import com.example.shopinglist.parserApi.ParsingFromSearch;
 import com.example.shopinglist.parserApi.ProductPars;
+import com.example.shopinglist.services.GlobalSpisokService;
 import com.example.shopinglist.services.ServiceGoods;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,11 +21,16 @@ public class EdditShopListController {
 
     private final ServiceGoods serviceGoods;
     private final ParsingFromSearch parsingFromSearch;
+    private final GlobalSpisokService globalSpisokService;
+
+
 
     @GetMapping("/{idSpisok}")
     public String edditSpisok(@PathVariable Long idSpisok, Model model) {
         var goodsList = serviceGoods.allGoodsFromCurrentShopList(idSpisok);
+        var nameSpisok = globalSpisokService.getCurrentSpisok(idSpisok).getNameOfShopList();
         model.addAttribute("idSpisok", idSpisok);
+        model.addAttribute("nameSpisok", nameSpisok);
         model.addAttribute("allGoods", goodsList);
         model.addAttribute("products", Collections.EMPTY_LIST);
         return "eddit_shopList";
@@ -35,7 +41,9 @@ public class EdditShopListController {
                                    @RequestParam String productName,
                                    Model model) {
         var goodsList = serviceGoods.allGoodsFromCurrentShopList(idSpisok);
+        var nameSpisok = globalSpisokService.getCurrentSpisok(idSpisok).getNameOfShopList();
         model.addAttribute("idSpisok", idSpisok);
+        model.addAttribute("nameSpisok", nameSpisok);
         model.addAttribute("allGoods", goodsList);
         var products = (List<ProductPars>)parsingFromSearch.getListProducts(productName);
         model.addAttribute("products", products);
