@@ -13,9 +13,9 @@
     <div class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none bg-danger"></div>
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-4 link-secondary border-bottom rounded-3 border-3 border-dark">Все Списки</a></li>
+        <li><a href="#" class="nav-link px-4 link-dark">Все Списки</a></li>
         <li><a href="#" class="nav-link px-4 link-dark">Список на сегодня</a></li>
-<!--            <li><a href="#" class="nav-link px-4 link-dark" th:text="${nameSpisok}"></a></li>-->
+        <li><a href="#" class="nav-link px-4 link-secondary border-bottom rounded-3 border-3 border-dark" th:text="${nameShoppingList}"></a></li>
         <li><a href="#" class="nav-link px-4 link-dark">FAQs</a></li>
         <li><a href="#" class="nav-link px-4 link-dark">О разработчике</a></li>
     </ul>
@@ -29,7 +29,7 @@
 <div class="album py-5 bg-light" th:if="${error == null}">
     <div class="container-fluid">
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-sm-3">
+        <div class="row row-cols-1 row-cols-sm-2">
 
             <div class="col" >
                 <div class="card shadow-sm rounded-3 border-4 border-primary">
@@ -38,26 +38,20 @@
 
                         <div class="row align-items-center">
                             <div class="col-sm-2">
-                                <form action="/editNameGood" method="post">
-                                    <button type="submit" class="btn btn-light justify-content-start" ><img src="/images/edit.jpg" alt="редактировать" width="20" height="20"></button>
-                                </form>
+                                <img th:src="${goods.getImg()}" class="img-fluid">
                             </div>
-                            <div class="col-6 align-self-center" >
-                                <h5 class="text-start border-bottom border-2 border-info" th:text="${goods.getName()}">th:text1</h5>
+                            <div class="col-4 align-self-center" >
+                                <h5 class="text-center border-bottom border-2 border-info" th:text="${goods.getName()}">th:text1</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 class="text-center border-bottom border-2 border-info" th:text="${goods.getCount()} + ' шт.'">th:text1</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 class="text-center border-bottom border-2 border-info" th:text="${goods.getPrice()} + ' &#x20bd'">th:text1</h5>
                             </div>
                             <div class="col-sm-1">
-                                <form action="/buyGood" method="post">
+                                <form th:action="@{${idSpisok} + '/buyGood/'+${goods.getId()}}" method="post">
                                     <button type="submit" class="btn btn-light"><img src="/images/pngtree-green-check-mark-icon-flat-style-vector-png-image_3057019.jpg" alt="редактировать" width="25" height="25"></button>
-                                </form>
-                            </div>
-                            <div class="col-sm-1">
-                                <form action="/deleteGood" method="post">
-                                    <button type="submit" class="btn btn-light"><img src="/images/png-transparent-stop-sign-stop-miscellaneous-white-face.png" alt="редактировать" width="25" height="25"></button>
-                                </form>
-                            </div>
-                            <div class="col-sm-1">
-                                <form action="/notFindGood" method="post">
-                                    <button type="submit" class="btn btn-light"><img src="/images/free-png.ru-38.png" alt="редактировать" width="25" height="25"></button>
                                 </form>
                             </div>
                         </div>
@@ -72,40 +66,23 @@
                     <div class="card-body" th:each="goodsByu: ${goodsBYU}">
 
                         <div class="row align-items-center">
-                            <div class="col-sm-2"></div>
-                            <div class="col-6 align-self-center" >
-                                <h5 class="text-start border-bottom border-2 border-info" th:text="${goodsByu.getName()}">th:text1</h5>
+                            <div class="col-sm-2">
+                                <img th:src="${goodsByu.getImg()}" class="img-fluid">
                             </div>
-                            <div class="col-sm-1"></div>
+                            <div class="col-4 align-self-center" >
+                                <h5 class="text-center border-bottom border-2 border-info" th:text="${goodsByu.getName()}">th:text1</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 class="text-center border-bottom border-2 border-info" th:text="${goodsByu.getCount()} + ' шт.'">th:text1</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <h5 class="text-center border-bottom border-2 border-info" th:text="${goodsByu.getPrice()} + ' &#x20bd'">th:text1</h5>
+                            </div>
                             <div class="col-sm-1">
-                                <form action="/cancelGood" method="post">
+                                <form th:action="@{${idSpisok} + '/cancelGood/'+${goodsByu.getId()}}" method="post">
                                     <button type="submit" class="btn btn-light"><img src="/images/free-png.ru-38.png" alt="редактировать" width="25" height="25"></button>
                                 </form>
                             </div>
-                            <div class="col-sm-1"></div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card shadow-sm rounded-3 border-4 border-danger">
-                    <h5 class="rounded-3" align="center">НЕ КУПЛЕННО</h5>
-                    <div class="card-body" th:each="goodsCancel: ${goodsCANCEL}">
-
-                        <div class="row align-items-center">
-                            <div class="col-sm-2"></div>
-                            <div class="col-6 align-self-center" >
-                                <h5 class="text-start border-bottom border-2 border-info" th:text="${goodsCancel.getName()}">th:text1</h5>
-                            </div>
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-1">
-                                <form action="/cancelGood" method="post">
-                                    <button type="submit" class="btn btn-light"><img src="/images/free-png.ru-38.png" alt="редактировать" width="25" height="25"></button>
-                                </form>
-                            </div>
-                            <div class="col-sm-1"></div>
                         </div>
 
                     </div>

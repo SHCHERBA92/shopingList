@@ -97,4 +97,8 @@ public class ServiceGoods {
         goodsRepository.deleteById(id);
         return idCurrentSpisok;
     }
+
+    public GoodsModel getGoodById(Long id) {
+        return goodsRepository.findById(id).get();
+    }
 }
