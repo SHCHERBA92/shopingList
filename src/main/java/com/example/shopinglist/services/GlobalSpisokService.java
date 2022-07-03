@@ -43,4 +43,8 @@ public class GlobalSpisokService {
         globalSpisokRepository.deleteById(id);
     }
 
+    public List<GlobalSpisokModel> getAllToDaySpisok(){
+        LocalDate date = LocalDate.now();
+        return globalSpisokRepository.findAllByDateTo(date);
+    }
 }

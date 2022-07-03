@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -27,7 +28,6 @@ public class StartPage {
         var allShopSpisok = globalSpisokService.getAllShopSpisok();
         List<String> tempGoodsForSpisok = new ArrayList<>();
 
-
         model.addAttribute("spisokShop", allShopSpisok);
         model.addAttribute("tempGoodsForSpisok", tempGoodsForSpisok);
 
@@ -37,10 +37,16 @@ public class StartPage {
     @PostMapping("createNewList")
     public String createNewList(@RequestParam String listName,
                                 @RequestParam String storeName,
-                                @RequestParam("dateToShop") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateToShop
-    ) {
+                                @RequestParam("dateToShop") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateToShop) {
         LocalDate localDate = LocalDate.ofInstant(dateToShop.toInstant(), ZoneId.systemDefault());
         globalSpisokService.addNewSpisok(listName, storeName, localDate);
+        return "redirect:/startPage";
+    }
+
+    @PostMapping("deleteCurrentList/{id}/check")
+    @Transactional(rollbackOn = RuntimeException.class)
+    public String deleteCurrentList(@PathVariable("id") Long id){
+        globalSpisokService.deleteCurrentSpisok(id);
         return "redirect:/startPage";
     }
 
