@@ -20,7 +20,7 @@ public class AuthUserService {
         model.setActive(true);
         model.setRoleOfUser(RoleOfUser.USER);
         model.setPassword_(passwordEncoder.encode(model.getPassword_()));
-
+        authUserRepo.save(model);
     }
 
 }

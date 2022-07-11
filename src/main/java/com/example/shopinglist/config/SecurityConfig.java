@@ -26,13 +26,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                    .anyRequest()
-                    .authenticated()
+                .antMatchers("/login", "/registry").permitAll()
+                    .anyRequest().authenticated()
                 .and()
-                    .formLogin().loginPage("/login").permitAll()
+                    .formLogin().loginPage("/login")
+                //TODO: вместо registry при неудачи создадим другу страницу с правом выбора "регистрации"
+                    .failureUrl("/registry").defaultSuccessUrl("/startPage")
+                    .permitAll()
+//                .and()
+//                    .exceptionHandling().accessDeniedHandler()
                 .and()
                     .logout().permitAll();
     }
+
+//    https://www.springcloud.io/post/2022-04/spring-security-exceptions/#gsc.tab=0
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
