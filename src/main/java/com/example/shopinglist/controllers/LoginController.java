@@ -1,6 +1,7 @@
 package com.example.shopinglist.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/login")
@@ -8,12 +9,14 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
 
     @GetMapping
-    public String getLogin(){
+    public String getLogin(Model model){
+        model.addAttribute("error", false);
         return "/login";
     }
 
-    @PostMapping
-    public String failLogin(){
-        return "fail_login";
+    @GetMapping("/error")
+    public String errorLogin(Model model){
+        model.addAttribute("error", true);
+        return "/login";
     }
 }

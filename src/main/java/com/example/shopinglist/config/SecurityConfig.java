@@ -30,8 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .anyRequest().authenticated()
                 .and()
                     .formLogin().loginPage("/login")
-                //TODO: вместо registry при неудачи создадим другу страницу с правом выбора "регистрации"
-                    .failureUrl("/registry").defaultSuccessUrl("/startPage")
+                //TODO: сохдадим страницу FAQ
+                    .failureUrl("/login/error").defaultSuccessUrl("/FAQ")
                     .permitAll()
 //                .and()
 //                    .exceptionHandling().accessDeniedHandler()
@@ -45,23 +45,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailsService).passwordEncoder(customPasswordEncoder());
     }
-
-//    @Override
-//    @Bean
-//    protected UserDetailsService userDetailsService() {
-//        return new InMemoryUserDetailsManager(
-//                User.builder()
-//                        .username("kirill")
-//                        .password(passwordEncoder().encode("123"))
-//                        .roles("ADMIN")
-//                        .build(),
-//                User.builder()
-//                        .username("user")
-//                        .password(passwordEncoder().encode("123"))
-//                        .roles("USER")
-//                        .build()
-//        );
-//    }
 
     @Bean
     protected PasswordEncoder customPasswordEncoder(){
