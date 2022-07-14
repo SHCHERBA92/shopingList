@@ -34,6 +34,7 @@ public class AuthUserModel implements UserDetails {
     private String password_;
 
     @Column(name = "user_role")
+    @Enumerated(EnumType.STRING)
     private RoleOfUser roleOfUser;
 
     @Column(name = "user_active")

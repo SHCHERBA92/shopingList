@@ -20,6 +20,7 @@ public class AuthUserService {
         model.setActive(true);
         model.setRoleOfUser(RoleOfUser.USER);
         model.setPassword_(passwordEncoder.encode(model.getPassword_()));
+        model.setId(1l);    // TODO : забыл сделать generation на сущности - нужно добавить !
         authUserRepo.save(model);
     }
 

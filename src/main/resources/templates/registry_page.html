@@ -12,25 +12,25 @@
 
 <div class="row container-fluid justify-content-center">
   <div class="col-3">
-    <form>
+    <form method="post" action="/registry">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control border-2 border-bottom border-info" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <input type="email" name="email" class="form-control border-2 border-bottom border-info" id="exampleInputEmail1" aria-describedby="emailHelp">
         <div id="emailHelp" class="form-text">Введите свой e-mail.</div>
       </div>
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Name</label>
-        <input type="text" class="form-control border-2 border-bottom border-info" id="exampleInputEmail1" aria-describedby="NickNameHelp">
+        <label for="exampleInputNick" class="form-label">Name</label>
+        <input type="text" name="nickName" class="form-control border-2 border-bottom border-info" id="exampleInputNick" aria-describedby="NickNameHelp">
         <div id="NickNameHelp" class="form-text">Введите своё имя.</div>
       </div>
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control border-2 border-bottom border-info" id="exampleInputPassword1" aria-describedby="PasswordHelp">
+        <label for="exampleInputPassword" class="form-label">Password</label>
+        <input type="password" name="pass1" class="form-control border-2 border-bottom border-info" id="exampleInputPassword" aria-describedby="PasswordHelp">
         <div id="PasswordHelp" class="form-text">Введите пароль.</div>
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control border-2 border-bottom border-info" id="exampleInputPassword1" aria-describedby="PassworRdHelp">
+        <input type="password" name="pass2" class="form-control border-2 border-bottom border-info" id="exampleInputPassword1" aria-describedby="PassworRdHelp">
         <div id="PasswordRHelp" class="form-text">Повторите пароль.</div>
       </div>
       <button type="submit" class="btn btn-primary">Зарегистрировать</button>
