@@ -26,20 +26,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login", "/registry").permitAll()
-                    .anyRequest().authenticated()
+                .antMatchers("/login", "/registry", "/registry/auth/*", "/auth/*").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                    .formLogin().loginPage("/login")
+                .formLogin().loginPage("/login")
                 //TODO: сохдадим страницу FAQ
-                    .failureUrl("/login/error").defaultSuccessUrl("/FAQ")
-                    .permitAll()
+                .failureUrl("/login/error").defaultSuccessUrl("/FAQ")
+                .permitAll()
 //                .and()
 //                    .exceptionHandling().accessDeniedHandler()
                 .and()
-                    .logout().permitAll();
+                .logout().permitAll();
     }
-
-//    https://www.springcloud.io/post/2022-04/spring-security-exceptions/#gsc.tab=0
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -47,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    protected PasswordEncoder customPasswordEncoder(){
+    protected PasswordEncoder customPasswordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
 }

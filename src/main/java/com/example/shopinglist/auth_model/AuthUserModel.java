@@ -20,7 +20,12 @@ import java.util.*;
 @NoArgsConstructor
 public class AuthUserModel implements UserDetails {
 
+    private final String _NAME = "auth_user";
+    private final String SEQUENCE_NAME = "sequence_auth_user";
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = _NAME, sequenceName = SEQUENCE_NAME, initialValue = 50)
     @Column(name = "user_id")
     private Long id;
 
@@ -32,6 +37,9 @@ public class AuthUserModel implements UserDetails {
 
     @Column(name = "user_password")
     private String password_;
+
+    @Column(name = "code_activation")
+    private String codeActivation;
 
     @Column(name = "user_role")
     @Enumerated(EnumType.STRING)
@@ -60,21 +68,21 @@ public class AuthUserModel implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return active;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return active;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return active;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return active;
+        return true;
     }
 }

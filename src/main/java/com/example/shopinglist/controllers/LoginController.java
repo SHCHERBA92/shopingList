@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
 
     @GetMapping
-    public String getLogin(Model model){
+    public String getLogin(Model model) {
         model.addAttribute("error", false);
         return "/login";
     }
 
     @GetMapping("/error")
-    public String errorLogin(Model model){
+    public String errorLogin(Model model) {
         model.addAttribute("error", true);
         return "/login";
     }

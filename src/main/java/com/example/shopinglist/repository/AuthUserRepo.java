@@ -11,4 +11,6 @@ public interface AuthUserRepo extends JpaRepository<AuthUserModel, Long> {
     Optional<AuthUserModel> findByEmail(String eMail);
 
     Optional<AuthUserModel> findByNickName(String nickName);
+
+    Optional<AuthUserModel> findByCodeActivation(String code);
 }
