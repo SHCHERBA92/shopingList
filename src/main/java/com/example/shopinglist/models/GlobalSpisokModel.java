@@ -1,5 +1,6 @@
 package com.example.shopinglist.models;
 
+import com.example.shopinglist.auth_model.AuthUserModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,4 +37,8 @@ public class GlobalSpisokModel {
 
     @OneToMany(mappedBy = "globalSpisokModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<GoodsModel> goodsModels;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    AuthUserModel userModel;
 }

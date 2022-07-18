@@ -1,5 +1,6 @@
 package com.example.shopinglist.services;
 
+import com.example.shopinglist.auth_model.AuthUserModel;
 import com.example.shopinglist.exceptions.ExceptionNotElements;
 import com.example.shopinglist.models.GlobalSpisokModel;
 import com.example.shopinglist.repository.GlobalSpisokRepository;
@@ -21,6 +22,10 @@ public class GlobalSpisokService {
 
     public List<GlobalSpisokModel> getAllShopSpisok() {
         return globalSpisokRepository.findAll();
+    }
+
+    public List<GlobalSpisokModel> getAllShopSpisok(AuthUserModel userModel) {
+        return globalSpisokRepository.findAllByUserModel(userModel);
     }
 
     public void addNewSpisok(String spisokName, String storeName, LocalDate localDate) {

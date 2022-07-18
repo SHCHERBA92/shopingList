@@ -27,7 +27,16 @@ public class AuthUserService {
     public AuthUserModel getAuthUserByCodeActivation(String code){
         var user = authUserRepo.findByCodeActivation(code).orElseThrow(() -> new ExceptionNotElements("Код активации не найден"));
         user.setActive(true);
+        authUserRepo.save(user);
         return user;
+    }
+
+    public AuthUserModel getUser(String email){
+        return authUserRepo.findByEmail(email).orElseThrow(() -> new ExceptionNotElements("Пользователь не найден"));
+    }
+
+    public AuthUserModel getUserByNickName(String nickName){
+        return authUserRepo.findByNickName(nickName).orElseThrow(() -> new ExceptionNotElements("Пользователь не найден"));
     }
 
 }

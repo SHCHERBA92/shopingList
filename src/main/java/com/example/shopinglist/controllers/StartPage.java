@@ -1,10 +1,10 @@
 package com.example.shopinglist.controllers;
 
-import com.example.shopinglist.models.GlobalSpisokModel;
+import com.example.shopinglist.auth_model.AuthUserModel;
+import com.example.shopinglist.services.AuthUserService;
 import com.example.shopinglist.services.GlobalSpisokService;
-import com.example.shopinglist.services.ServiceGoods;
-import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,19 +17,26 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@AllArgsConstructor
+
 public class StartPage {
 
     private final GlobalSpisokService globalSpisokService;
-    private final ServiceGoods serviceGoods;
+    private final AuthUserService authUserService;
+
+    public StartPage(GlobalSpisokService globalSpisokService, AuthUserService authUserService) {
+        this.globalSpisokService = globalSpisokService;
+        this.authUserService = authUserService;
+    }
 
     @GetMapping("startPage")
     public String startPage(Model model) {
-        var allShopSpisok = globalSpisokService.getAllShopSpisok();
+        AuthUserModel userModel = getUserFromContext();
+        var allShopSpisok = globalSpisokService.getAllShopSpisok(userModel);
         List<String> tempGoodsForSpisok = new ArrayList<>();
 
         model.addAttribute("spisokShop", allShopSpisok);
         model.addAttribute("tempGoodsForSpisok", tempGoodsForSpisok);
+        model.addAttribute("nickName", userModel.getNickName());
 
         return "start_page_shopList";
     }
@@ -50,4 +57,10 @@ public class StartPage {
         return "redirect:/startPage";
     }
 
+    private AuthUserModel getUserFromContext(){
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        var email = authentication.getName();
+        return (AuthUserModel) authentication.getPrincipal();
+//        return authUserService.getUser(email);
+    }
 }
