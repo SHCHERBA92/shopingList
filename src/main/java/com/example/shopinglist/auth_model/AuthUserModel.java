@@ -87,6 +87,6 @@ public class AuthUserModel implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.active;
     }
 }
