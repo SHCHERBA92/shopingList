@@ -10,9 +10,4 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-#  mail:
-#    host: smtp.gmail.com
-#    port: 587
-#    username: kirillshcherba92@gmail.com
-#    password: Jumpjet_123
-#    protocol: smtp
+
