@@ -3,6 +3,7 @@ package com.example.shopinglist.services;
 import com.example.shopinglist.auth_model.AuthUserModel;
 import com.example.shopinglist.auth_model.RoleOfUser;
 import com.example.shopinglist.exceptions.ExceptionNotElements;
+import com.example.shopinglist.exceptions.ExceptionRepeatElement;
 import com.example.shopinglist.repository.AuthUserRepo;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -39,4 +40,9 @@ public class AuthUserService {
         return authUserRepo.findByNickName(nickName).orElseThrow(() -> new ExceptionNotElements("Пользователь не найден"));
     }
 
+    public void checkEmail(String email) {
+        if (authUserRepo.findByEmail(email).isPresent()){
+            throw new ExceptionRepeatElement("Такой email уже существует");
+        }
+    }
 }

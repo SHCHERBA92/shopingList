@@ -25,6 +25,7 @@ public class RegistryController {
 
     @GetMapping
     public String getRegistry(Model model) {
+        model.addAttribute("ExceptionError", "");
         return "registry_page";
     }
 
@@ -33,18 +34,23 @@ public class RegistryController {
                                @RequestParam String nickName,
                                @RequestParam String pass1,
                                @RequestParam String pass2, Model model) {
-        if (checkPass(pass1, pass2)) {
-            String code = generateCode();
+            try {
+                checkPass(pass1, pass2);
+                authUserService.checkEmail(email);
 
-            var currentUser = createNewUser(email, nickName, pass1, code);
-            mailSenderService.sendMail(email, "Подтверждение почты !", code);
-            authUserService.addNewUser(currentUser);
+                String code = generateCode();
+                var currentUser = createNewUser(email, nickName, pass1, code);
+                mailSenderService.sendMail(email, "Подтверждение почты !", code);
+                authUserService.addNewUser(currentUser);
 
-            return "redirect:/login";
-        } else {
-            return "redirect:/registry";
+                model.addAttribute("email", email);
+                return "page_send_mail";
+            }
+            catch (RuntimeException e){
+                model.addAttribute("ExceptionError", e.getMessage());
+                return "registry_page";
+            }
         }
-    }
 
     @GetMapping("/auth/{code}")
     public String checkAuth(Model model, @PathVariable String code) {
