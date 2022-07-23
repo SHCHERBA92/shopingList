@@ -24,7 +24,7 @@ public class GlobalSpisokService {
         return globalSpisokRepository.findAll();
     }
 
-    public List<GlobalSpisokModel> getAllShopSpisok(AuthUserModel userModel) {
+    public List<GlobalSpisokModel> getAllShopSpisokByCurrentUser(AuthUserModel userModel) {
         return globalSpisokRepository.findAllByUserModel(userModel);
     }
 

@@ -5,6 +5,7 @@ import com.example.shopinglist.auth_model.RoleOfUser;
 import com.example.shopinglist.exceptions.ExceptionNotElements;
 import com.example.shopinglist.exceptions.ExceptionRepeatElement;
 import com.example.shopinglist.repository.AuthUserRepo;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -44,5 +45,11 @@ public class AuthUserService {
         if (authUserRepo.findByEmail(email).isPresent()){
             throw new ExceptionRepeatElement("Такой email уже существует");
         }
+    }
+
+    public AuthUserModel getUserFromContext(){
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        var email = authentication.getName();
+        return (AuthUserModel) authentication.getPrincipal();
     }
 }

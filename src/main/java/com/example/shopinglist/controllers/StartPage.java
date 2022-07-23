@@ -17,7 +17,6 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-
 public class StartPage {
 
     private final GlobalSpisokService globalSpisokService;
@@ -30,8 +29,8 @@ public class StartPage {
 
     @GetMapping("startPage")
     public String startPage(Model model) {
-        AuthUserModel userModel = getUserFromContext();
-        var allShopSpisok = globalSpisokService.getAllShopSpisok(userModel);
+        AuthUserModel userModel = authUserService.getUserFromContext();
+        var allShopSpisok = globalSpisokService.getAllShopSpisokByCurrentUser(userModel);
         List<String> tempGoodsForSpisok = new ArrayList<>();
 
         model.addAttribute("spisokShop", allShopSpisok);
@@ -57,10 +56,9 @@ public class StartPage {
         return "redirect:/startPage";
     }
 
-    private AuthUserModel getUserFromContext(){
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-        var email = authentication.getName();
-        return (AuthUserModel) authentication.getPrincipal();
-//        return authUserService.getUser(email);
-    }
+//    private AuthUserModel getUserFromContext(){
+//        var authentication = SecurityContextHolder.getContext().getAuthentication();
+//        var email = authentication.getName();
+//        return (AuthUserModel) authentication.getPrincipal();
+//    }
 }

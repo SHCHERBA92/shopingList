@@ -44,6 +44,7 @@ public class RegistryController {
                 authUserService.addNewUser(currentUser);
 
                 model.addAttribute("email", email);
+                model.addAttribute("code", code);
                 return "page_send_mail";
             }
             catch (RuntimeException e){
@@ -51,6 +52,16 @@ public class RegistryController {
                 return "registry_page";
             }
         }
+
+    @PostMapping("/auth/repiet_mail")
+    public String postRepietOrCancelMailSend(@RequestParam String email,
+                                             @RequestParam String code,
+                                             Model model){
+        mailSenderService.sendMail(email, "Подтверждение почты !", code);
+        model.addAttribute("email", email);
+        model.addAttribute("code", code);
+        return "page_send_mail";
+    }
 
     @GetMapping("/auth/{code}")
     public String checkAuth(Model model, @PathVariable String code) {
