@@ -8,6 +8,7 @@ import com.example.shopinglist.repository.GoodsRepository;
 import com.example.shopinglist.repository.GlobalSpisokRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -39,6 +40,18 @@ public class ServiceGoods {
         var currentGlobalSpisok = globalSpisokRepository.findById(id).orElseThrow(() -> new ExceptionNotElements(NOT_FIND_ELEMENT));
         model.setName(name);
         model.setRoleOfStatus(RoleOfStatus.READY_BUY);
+        model.setGlobalSpisokModel(currentGlobalSpisok);
+        goodsRepository.saveAndFlush(model);
+    }
+
+    public void createNewGood(String name, String img, BigDecimal price, Integer count, Long idSpisok) {
+        GoodsModel model = new GoodsModel();
+        var currentGlobalSpisok = globalSpisokRepository.findById(idSpisok).orElseThrow(() -> new ExceptionNotElements(NOT_FIND_ELEMENT));
+        model.setName(name);
+        model.setRoleOfStatus(RoleOfStatus.READY_BUY);
+        model.setImg(img);
+        model.setPrice(price.multiply(new BigDecimal(count)));
+        model.setCount(count);
         model.setGlobalSpisokModel(currentGlobalSpisok);
         goodsRepository.saveAndFlush(model);
     }
@@ -77,11 +90,15 @@ public class ServiceGoods {
         return goodsRepository.findAllByGlobalSpisokModel_IdAndRoleOfStatus(id, role);
     }
 
-    public Long deleteGood(Long id){
+    public Long deleteGood(Long id) {
         //TODO: сделать проверки на то есть ли такой элемент с таким id в БД
 //        Long idCurrentSpisok = goodsRepository.findByGlobalSpisokModelId(id).get().getId();
         Long idCurrentSpisok = goodsRepository.findById(id).get().getGlobalSpisokModel().getId();
         goodsRepository.deleteById(id);
         return idCurrentSpisok;
+    }
+
+    public GoodsModel getGoodById(Long id) {
+        return goodsRepository.findById(id).get();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.shopinglist.services;
 
+import com.example.shopinglist.auth_model.AuthUserModel;
 import com.example.shopinglist.exceptions.ExceptionNotElements;
 import com.example.shopinglist.models.GlobalSpisokModel;
 import com.example.shopinglist.repository.GlobalSpisokRepository;
@@ -23,7 +24,11 @@ public class GlobalSpisokService {
         return globalSpisokRepository.findAll();
     }
 
-    public void addNewSpisok(String spisokName, String storeName, LocalDate localDate) {
+    public List<GlobalSpisokModel> getAllShopSpisokByCurrentUser(AuthUserModel userModel) {
+        return globalSpisokRepository.findAllByUserModel(userModel);
+    }
+
+    public void addNewSpisok(String spisokName, String storeName, LocalDate localDate, AuthUserModel userModel) {
         if (StringUtils.isEmpty(spisokName) || StringUtils.isEmpty(storeName) || localDate == null) {
             throw new ExceptionNotElements("");
         }
@@ -31,16 +36,21 @@ public class GlobalSpisokService {
         globalSpisokModel.setNameOfShopList(spisokName);
         globalSpisokModel.setStoreName(storeName);
         globalSpisokModel.setDateTo(localDate);
+        globalSpisokModel.setUserModel(userModel);
         globalSpisokRepository.saveAndFlush(globalSpisokModel);
     }
 
-    public GlobalSpisokModel getCurrentSpisok(Long id){
+    public GlobalSpisokModel getCurrentSpisok(Long id) {
         return globalSpisokRepository.findById(id)
-                .orElseThrow( () -> new ExceptionNotElements("Не смогли найти список"));
+                .orElseThrow(() -> new ExceptionNotElements("Не смогли найти список"));
     }
 
-    public void deleteCurrentSpisok(Long id){
+    public void deleteCurrentSpisok(Long id) {
         globalSpisokRepository.deleteById(id);
     }
 
+    public List<GlobalSpisokModel> getAllToDaySpisok(AuthUserModel userModel){
+        LocalDate date = LocalDate.now();
+        return globalSpisokRepository.findAllByDateToAndUserModel(date, userModel);
+    }
 }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отредактировать Список</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light" th:text=" 'Регистрация пользователя ' + ${email}"></h1>
+        <p class="lead text-muted" th:text="'На указанную почту ' + ${email} + ' было отправлено письмо. Для продолжения регистрации перейдите, пожалуйста, по этой ссылке.'"></p>
+            <p>
+                <form method="post" th:action="@{'registry/auth/repiet_mail'}">
+                    <input type="submit" class="btn btn-primary my-2" value="Отправить повторно">
+                    <input type="hidden" name="email" th:value="${email}">
+                    <input type="hidden" name="code" th:value="${code}">
+                </form>
+                <form method="post" th:action="@{'auth/cancel_mail'}">
+                    <input type="submit" class="btn btn-secondary my-2" value="Отменить регистрацию">
+                    <input type="hidden" name="email" th:value="${email}">
+                </form>
+            </p>
+
+    </div>
+</div>
+</body>
+</html>

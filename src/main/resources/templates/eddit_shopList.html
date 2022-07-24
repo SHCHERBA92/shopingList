@@ -7,8 +7,35 @@
   <title>Отредактировать Список</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
 </head>
+
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+  <div class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none bg-danger"></div>
+
+  <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+    <li><a th:href="@{'/startPage'}" class="nav-link px-4 link-dark">Все Списки</a></li>
+    <li><a href="#" class="nav-link px-4 link-dark">Список на сегодня</a></li>
+      <li><a href="#" class="nav-link px-4 link-secondary border-bottom rounded-3 border-3 border-dark" th:text="${nameSpisok}"></a></li>
+    <li><a href="#" class="nav-link px-4 link-dark">FAQs</a></li>
+    <li><a href="#" class="nav-link px-4 link-dark">О разработчике</a></li>
+  </ul>
+
+  <div class="col-md-3 text-end">
+    <div class=" text-center">
+      <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle show" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="true">
+        <button alt="nickname" width="32" height="32" class="btn btn-info text-capitalize rounded-circle ">text</button>
+      </a>
+      <ul class="dropdown-menu text-small show" aria-labelledby="dropdownUser1" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 34px);" data-popper-placement="bottom-start">
+        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#">Sign out</a></li>
+      </ul>
+    </div>
+  </div>
+
+</header>
+
 <body>
 <div class="album py-5 bg-light">
   <div class="container-fluid">
@@ -22,11 +49,18 @@
           <div class="card-body"  th:each="goods: ${allGoods}">
 
             <div class="row align-items-center">
-              <div class="col-sm-2"></div>
-              <div class="col-6 align-self-center" >
+              <div class="col-sm-2">
+                <img th:src="${goods.getImg()}" class="img-fluid">
+              </div>
+              <div class="col-4 align-self-center" >
                 <h5 class="text-center border-bottom border-2 border-info" th:text="${goods.getName()}">th:text1</h5>
               </div>
-              <div class="col-sm-1"></div>
+                <div class="col-sm-2">
+                    <h5 class="text-center border-bottom border-2 border-info" th:text="${goods.getCount()} + ' шт.'">th:text1</h5>
+                </div>
+              <div class="col-sm-2">
+                <h5 class="text-center border-bottom border-2 border-info" th:text="${goods.getPrice()} + ' &#x20bd'">th:text1</h5>
+              </div>
               <div class="col-sm-1">
                 <form th:action="@{${idSpisok} + '/deleteGood/'+ ${goods.getId()}}" method="post">
                   <button type="submit" class="btn btn-danger" alt="удалить">удалить</button>
@@ -36,12 +70,45 @@
 
           </div>
         </div>
-        <div class="col-sm-1 mt-5">
-          <form th:action="@{${idSpisok} + '/newGood'}" method="post">
-            <input type="text" placeholder="Введите название продукта" th:name="nameGood">
-            <input type="submit" class="btn btn-success" value="Добавить">
+<!--        th:action="@{${idSpisok} + '/newGood'}"-->
+        <div class="row mt-5">
+          <form method="post">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Введите название продукта" th:name="productName">
+              <input type="submit" class="btn btn-success" value="Найти">
+            </div>
           </form>
         </div>
+<!--/////////-->
+        <div class="card-body"  th:if="${!products.isEmpty()}">
+
+          <div  th:each="product: ${products}">
+            <form th:action="@{${idSpisok} + '/newGood'}" method="post" class="row align-items-center mt-5">
+              <div class="col-sm-2">
+                <img th:src="${product.getImg()}" class="img-fluid">
+              </div>
+              <div class="col-4 align-self-center" >
+                <h5 class="text-center border-bottom border-2 border-info" th:text="${product.getName()}">th:text1</h5>
+              </div>
+              <div class="col-2">
+                <input type="number" value="1" min="1" max="1000" class="form-control w-75" name="countProduct">
+              </div>
+              <div class="col-2">
+                  <h5 class="text-center border-bottom border-2 border-info" th:text="${product.getPrice()} + ' &#x20bd'">th:text1</h5>
+              </div>
+
+              <div class="col-1">
+                <input type="hidden" th:value="${product.getName()}" name="nameProduct">
+                <input type="hidden" th:value="${product.getImg()}" name="imgProduct">
+                <input type="hidden" th:value="${product.getPrice()}" name="priceProduct">
+                <button type="submit" class="btn btn-success" alt="удалить">добавить</button>
+              </div>
+            </form>
+
+          </div>
+
+        </div>
+
       </div>
 
 
