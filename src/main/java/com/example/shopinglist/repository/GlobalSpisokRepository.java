@@ -10,6 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GlobalSpisokRepository extends JpaRepository<GlobalSpisokModel, Long> {
-    List<GlobalSpisokModel> findAllByDateTo(LocalDate date);
+    List<GlobalSpisokModel> findAllByDateToAndUserModel(LocalDate date, AuthUserModel userModel);
     List<GlobalSpisokModel> findAllByUserModel(AuthUserModel userModel);
 }

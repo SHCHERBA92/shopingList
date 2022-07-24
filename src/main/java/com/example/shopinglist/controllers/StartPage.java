@@ -45,7 +45,8 @@ public class StartPage {
                                 @RequestParam String storeName,
                                 @RequestParam("dateToShop") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateToShop) {
         LocalDate localDate = LocalDate.ofInstant(dateToShop.toInstant(), ZoneId.systemDefault());
-        globalSpisokService.addNewSpisok(listName, storeName, localDate);
+        AuthUserModel userModel = authUserService.getUserFromContext();
+        globalSpisokService.addNewSpisok(listName, storeName, localDate, userModel);
         return "redirect:/startPage";
     }
 

@@ -28,7 +28,7 @@ public class GlobalSpisokService {
         return globalSpisokRepository.findAllByUserModel(userModel);
     }
 
-    public void addNewSpisok(String spisokName, String storeName, LocalDate localDate) {
+    public void addNewSpisok(String spisokName, String storeName, LocalDate localDate, AuthUserModel userModel) {
         if (StringUtils.isEmpty(spisokName) || StringUtils.isEmpty(storeName) || localDate == null) {
             throw new ExceptionNotElements("");
         }
@@ -36,6 +36,7 @@ public class GlobalSpisokService {
         globalSpisokModel.setNameOfShopList(spisokName);
         globalSpisokModel.setStoreName(storeName);
         globalSpisokModel.setDateTo(localDate);
+        globalSpisokModel.setUserModel(userModel);
         globalSpisokRepository.saveAndFlush(globalSpisokModel);
     }
 
@@ -48,8 +49,8 @@ public class GlobalSpisokService {
         globalSpisokRepository.deleteById(id);
     }
 
-    public List<GlobalSpisokModel> getAllToDaySpisok(){
+    public List<GlobalSpisokModel> getAllToDaySpisok(AuthUserModel userModel){
         LocalDate date = LocalDate.now();
-        return globalSpisokRepository.findAllByDateTo(date);
+        return globalSpisokRepository.findAllByDateToAndUserModel(date, userModel);
     }
 }

@@ -22,7 +22,7 @@ public class ToDaySpisokController {
     public String getToDaySpisok(Model model){
         AuthUserModel userModel = authUserService.getUserFromContext();
 
-        var allShopSpisok = globalSpisokService.getAllToDaySpisok();
+        var allShopSpisok = globalSpisokService.getAllToDaySpisok(userModel);
 
         model.addAttribute("spisokShop", allShopSpisok);
         model.addAttribute("nickName", userModel.getNickName());
