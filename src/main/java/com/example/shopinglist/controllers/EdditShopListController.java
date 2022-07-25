@@ -2,6 +2,7 @@ package com.example.shopinglist.controllers;
 
 import com.example.shopinglist.parserApi.ParsingFromSearch;
 import com.example.shopinglist.parserApi.ProductPars;
+import com.example.shopinglist.services.AuthUserService;
 import com.example.shopinglist.services.GlobalSpisokService;
 import com.example.shopinglist.services.ServiceGoods;
 import lombok.AllArgsConstructor;
@@ -10,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,6 +22,7 @@ public class EdditShopListController {
     private final ServiceGoods serviceGoods;
     private final ParsingFromSearch parsingFromSearch;
     private final GlobalSpisokService globalSpisokService;
+    private final AuthUserService authUserService;
 
 
 
@@ -29,6 +30,7 @@ public class EdditShopListController {
     public String edditSpisok(@PathVariable Long idSpisok, Model model) {
         var goodsList = serviceGoods.allGoodsFromCurrentShopList(idSpisok);
         var nameSpisok = globalSpisokService.getCurrentSpisok(idSpisok).getNameOfShopList();
+        model.addAttribute("nickName", authUserService.getUserFromContext().getNickName());
         model.addAttribute("idSpisok", idSpisok);
         model.addAttribute("nameSpisok", nameSpisok);
         model.addAttribute("allGoods", goodsList);

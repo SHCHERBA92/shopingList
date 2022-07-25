@@ -3,6 +3,7 @@ package com.example.shopinglist.controllers;
 import com.example.shopinglist.exceptions.ExceptionNotElements;
 import com.example.shopinglist.models.GoodsModel;
 import com.example.shopinglist.models.RoleOfStatus;
+import com.example.shopinglist.services.AuthUserService;
 import com.example.shopinglist.services.GlobalSpisokService;
 import com.example.shopinglist.services.ServiceGoods;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ public class HomeShopList {
 
     private final ServiceGoods serviceGoods;
     private final GlobalSpisokService globalSpisokService;
+    private final AuthUserService authUserService;
 
     @GetMapping("/{id}")
     public String getHomePage(@PathVariable Long id, Model model) {
@@ -44,6 +46,8 @@ public class HomeShopList {
         model.addAttribute("goodsCANCEL", goodsListCANCEL);
         model.addAttribute("idSpisok", id);
         model.addAttribute("nameShoppingList", nameShoppingList);
+
+        model.addAttribute("nickName", authUserService.getUserFromContext().getNickName());
 
         return "shop-list";
     }

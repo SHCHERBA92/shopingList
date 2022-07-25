@@ -15,6 +15,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class StartPage {
@@ -30,7 +31,9 @@ public class StartPage {
     @GetMapping("startPage")
     public String startPage(Model model) {
         AuthUserModel userModel = authUserService.getUserFromContext();
-        var allShopSpisok = globalSpisokService.getAllShopSpisokByCurrentUser(userModel);
+        var allShopSpisok = globalSpisokService.getAllShopSpisokByCurrentUser(userModel).stream()
+                .sorted((o1, o2) -> o1.getDateTo().compareTo(o2.getDateTo()))
+                .collect(Collectors.toList());
         List<String> tempGoodsForSpisok = new ArrayList<>();
 
         model.addAttribute("spisokShop", allShopSpisok);
