@@ -26,8 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
-                //TODO: сохдадим страницу FAQ
-                .failureUrl("/login/error").defaultSuccessUrl("/FAQ")
+                .failureUrl("/login/error").defaultSuccessUrl("/instruction")
                 .permitAll()
 //                .and()
 //                    .exceptionHandling().accessDeniedHandler()

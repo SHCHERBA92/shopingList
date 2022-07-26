@@ -14,9 +14,9 @@
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a th:href="@{'/startPage'}" class="nav-link px-4 link-dark">Все Списки</a></li>
-        <li><a href="#" class="nav-link px-4 link-dark">Список на сегодня</a></li>
+        <li><a th:href="@{'/startPageToDay'}" class="nav-link px-4 link-dark">Список на сегодня</a></li>
         <li><a href="#" class="nav-link px-4 link-secondary border-bottom rounded-3 border-3 border-dark" th:text="${nameShoppingList}"></a></li>
-        <li><a href="#" class="nav-link px-4 link-dark">Инструкция</a></li>
+        <li><a th:href="@{'/instruction'}" class="nav-link px-4 link-dark">Инструкция</a></li>
         <li><a href="#" class="nav-link px-4 link-dark">О разработчике</a></li>
     </ul>
 
