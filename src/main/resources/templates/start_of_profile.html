@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="container-about">
+    <div class="container">
+        <div class="page-header" id="about">
+            <h1 class="text-center text-danger">nickname</h1>
+            <h2 class="text-center">Страница редактирования профиля</h2>
+            <br>
+        </div>
+        <div class="row">
+
+            <div class="col-md-4 text-center">
+                <img class="img-responsive" style="border-radius:50%; width:250px; height:250px;" src="images/image1.jpg">
+                <h3 class="text-danger">Mike Miller</h3>
+                <br>
+                <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+            </div>
+
+            <div class="col-md-7 col-lg-8">
+                <h4 class="mb-3">Billing address</h4>
+
+                <form class="needs-validation" novalidate="" >
+
+                    <div class="row g-3">
+
+                        <div class="col-sm-5">
+                            <label for="firstName" class="form-label">Имя</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Введите Имя" value="" required="">
+                        </div>
+
+                        <div class="col-sm-5">
+                            <label for="lastName" class="form-label">Фамилия</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Введите фамилию" value="" required="">
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label for="Age" class="form-label">Возраст</label>
+                            <input type="number" class="form-control" id="Age" min="0" max="150" value="" required="">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="username" class="form-label">Email</label>
+                            <div class="input-group has-validation">
+                                <input type="text" class="form-control" id="username" placeholder="Username" required="">
+                                <div class="invalid-feedback">
+                                    Your username is required.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="country" class="form-label">Страна</label>
+                            <input type="text" class="form-control" id="country" placeholder="Введите страну">
+                        </div>
+
+                        <div class="col-md-5">
+                            <label for="state" class="form-label">Город</label>
+                            <input type="text" class="form-control" id="state" placeholder="Введите свой город">
+                        </div>
+
+                    </div>
+
+                    <hr class="my-4">
+
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Сохранить</button>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
