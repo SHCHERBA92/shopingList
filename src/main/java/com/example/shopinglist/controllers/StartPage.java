@@ -38,7 +38,7 @@ public class StartPage {
 
         model.addAttribute("spisokShop", allShopSpisok);
         model.addAttribute("tempGoodsForSpisok", tempGoodsForSpisok);
-        model.addAttribute("nickName", userModel.getNickName());
+        model.addAttribute("currentUser", userModel);
 
         return "start_page_shopList";
     }

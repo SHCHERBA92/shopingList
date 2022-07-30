@@ -47,7 +47,7 @@ public class HomeShopList {
         model.addAttribute("idSpisok", id);
         model.addAttribute("nameShoppingList", nameShoppingList);
 
-        model.addAttribute("nickName", authUserService.getUserFromContext().getNickName());
+        model.addAttribute("currentUser", authUserService.getUserFromContext());
 
         return "shop-list";
     }

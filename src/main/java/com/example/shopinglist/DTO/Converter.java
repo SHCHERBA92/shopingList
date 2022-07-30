@@ -1,21 +1,32 @@
 package com.example.shopinglist.DTO;
 
+import com.example.shopinglist.DTO.profil.UserProfileDTO;
 import com.example.shopinglist.models.GlobalSpisokModel;
 import com.example.shopinglist.models.GoodsModel;
+import com.example.shopinglist.models.profile.UserProfile;
 import org.modelmapper.ModelMapper;
 
 public class Converter {
-    private final ModelMapper modelMapper;
+    private static ModelMapper modelMapper = new ModelMapper();
 
-    public Converter() {
-        this.modelMapper = new ModelMapper();
-    }
+//    public Converter() {
+//        this.modelMapper = new ModelMapper();
+//    }
 
-    GoodsDTO converterGoodsModelToGoodsDTO(GoodsModel model) {
+    public static GoodsDTO converterGoodsModelToGoodsDTO(GoodsModel model) {
         return modelMapper.map(model, GoodsDTO.class);
     }
 
-    GlobalSpisokDTO converterStatusModelToStatusDTO(GlobalSpisokModel model) {
+
+    public static GlobalSpisokDTO converterStatusModelToStatusDTO(GlobalSpisokModel model) {
         return modelMapper.map(model, GlobalSpisokDTO.class);
+    }
+
+    public static UserProfileDTO convertUserProfileToDTO(UserProfile userProfile) {
+        return modelMapper.map(userProfile, UserProfileDTO.class);
+    }
+
+    public static UserProfile convertUserProfileDTOtoUserProfile(UserProfileDTO userProfileDTO) {
+        return modelMapper.map(userProfileDTO, UserProfile.class);
     }
 }

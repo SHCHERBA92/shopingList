@@ -25,7 +25,7 @@ public class ToDaySpisokController {
         var allShopSpisok = globalSpisokService.getAllToDaySpisok(userModel);
 
         model.addAttribute("spisokShop", allShopSpisok);
-        model.addAttribute("nickName", userModel.getNickName());
+        model.addAttribute("currentUser", userModel);
 
         return "start_page_shopList_current";
     }

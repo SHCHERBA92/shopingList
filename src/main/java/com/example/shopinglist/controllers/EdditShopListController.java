@@ -25,12 +25,12 @@ public class EdditShopListController {
     private final AuthUserService authUserService;
 
 
-
     @GetMapping("/{idSpisok}")
     public String edditSpisok(@PathVariable Long idSpisok, Model model) {
         var goodsList = serviceGoods.allGoodsFromCurrentShopList(idSpisok);
         var nameSpisok = globalSpisokService.getCurrentSpisok(idSpisok).getNameOfShopList();
-        model.addAttribute("nickName", authUserService.getUserFromContext().getNickName());
+        model.addAttribute("currentUser", authUserService.getUserFromContext());
+
         model.addAttribute("idSpisok", idSpisok);
         model.addAttribute("nameSpisok", nameSpisok);
         model.addAttribute("allGoods", goodsList);
@@ -47,7 +47,7 @@ public class EdditShopListController {
         model.addAttribute("idSpisok", idSpisok);
         model.addAttribute("nameSpisok", nameSpisok);
         model.addAttribute("allGoods", goodsList);
-        var products = (List<ProductPars>)parsingFromSearch.getListProducts(productName);
+        var products = (List<ProductPars>) parsingFromSearch.getListProducts(productName);
         model.addAttribute("products", products);
 
         return "eddit_shopList";
@@ -59,7 +59,7 @@ public class EdditShopListController {
                              @RequestParam String imgProduct,
                              @RequestParam String priceProduct,
                              @RequestParam String countProduct) {
-        serviceGoods.createNewGood(nameProduct, imgProduct, BigDecimal.valueOf(Double.valueOf(priceProduct)),Integer.valueOf(countProduct) , idSpisok);
+        serviceGoods.createNewGood(nameProduct, imgProduct, BigDecimal.valueOf(Double.valueOf(priceProduct)), Integer.valueOf(countProduct), idSpisok);
         return "redirect:/edditSpisok/{idSpisok}";
     }
 

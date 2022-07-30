@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class ProfileController {
 
     @GetMapping("profile/{userId}")
-    String getProfile(@PathVariable Long userId){
+    String getProfile(@PathVariable Long userId) {
         return "start_of_profile";
     }
 }
