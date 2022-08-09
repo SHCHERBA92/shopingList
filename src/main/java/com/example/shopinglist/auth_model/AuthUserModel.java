@@ -1,6 +1,7 @@
 package com.example.shopinglist.auth_model;
 
 import com.example.shopinglist.models.GlobalSpisokModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -52,7 +53,8 @@ public class AuthUserModel implements UserDetails {
     @Column(name = "user_localCreated")
     private LocalDate localDateCreated;
 
-    @OneToMany(mappedBy = "userModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "userModel", cascade = CascadeType.ALL)
     private List<GlobalSpisokModel> globalSpisokModels;
 
     @Override

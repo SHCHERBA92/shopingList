@@ -1,6 +1,7 @@
 package com.example.shopinglist.DTO;
 
 import com.example.shopinglist.DTO.profil.UserProfileDTO;
+import com.example.shopinglist.auth_model.AuthUserModel;
 import com.example.shopinglist.models.GlobalSpisokModel;
 import com.example.shopinglist.models.GoodsModel;
 import com.example.shopinglist.models.profile.UserProfile;
@@ -28,5 +29,9 @@ public class Converter {
 
     public static UserProfile convertUserProfileDTOtoUserProfile(UserProfileDTO userProfileDTO) {
         return modelMapper.map(userProfileDTO, UserProfile.class);
+    }
+
+    public static AuthUserDTO convertAuthUserModelT0DTO(AuthUserModel model){
+        return modelMapper.map(model, AuthUserDTO.class);
     }
 }
