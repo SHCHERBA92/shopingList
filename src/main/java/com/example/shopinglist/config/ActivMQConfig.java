@@ -10,7 +10,7 @@ import javax.jms.Queue;
 public class ActivMQConfig {
 
     @Bean
-    public Queue queue(){
+    public Queue queue() {
         return new ActiveMQQueue("email_to_sender");
     }
 }

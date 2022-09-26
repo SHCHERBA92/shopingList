@@ -2,15 +2,12 @@ package com.example.shopinglist.controllers;
 
 import com.example.shopinglist.DTO.mail.Mail_DTO;
 import com.example.shopinglist.auth_model.AuthUserModel;
-import com.example.shopinglist.mail.service.MailSenderService;
 import com.example.shopinglist.services.ActiveProducerService;
 import com.example.shopinglist.services.AuthUserService;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -20,13 +17,11 @@ import java.util.UUID;
 public class RegistryController {
 
     private final AuthUserService authUserService;
-    private final MailSenderService mailSenderService;
     private final ActiveProducerService activeProducerService;
 
 
-    public RegistryController(AuthUserService authUserService, MailSenderService mailSenderService, ActiveProducerService activeProducerService) {
+    public RegistryController(AuthUserService authUserService, ActiveProducerService activeProducerService) {
         this.authUserService = authUserService;
-        this.mailSenderService = mailSenderService;
         this.activeProducerService = activeProducerService;
     }
 

@@ -55,7 +55,7 @@ public class StartPage {
 
     @PostMapping("deleteCurrentList/{id}/check")
     @Transactional(rollbackOn = RuntimeException.class)
-    public String deleteCurrentList(@PathVariable("id") Long id){
+    public String deleteCurrentList(@PathVariable("id") Long id) {
         globalSpisokService.deleteCurrentSpisok(id);
         return "redirect:/startPage";
     }

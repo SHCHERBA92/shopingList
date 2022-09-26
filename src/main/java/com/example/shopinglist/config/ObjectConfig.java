@@ -10,7 +10,7 @@ import javax.persistence.Basic;
 public class ObjectConfig {
 
     @Bean
-    public ObjectMapper objectMapper(){
+    public ObjectMapper objectMapper() {
         return new ObjectMapper();
     }
 }

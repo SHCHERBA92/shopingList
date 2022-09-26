@@ -19,7 +19,7 @@ public class ToDaySpisokController {
     private final AuthUserService authUserService;
 
     @GetMapping
-    public String getToDaySpisok(Model model){
+    public String getToDaySpisok(Model model) {
         AuthUserModel userModel = authUserService.getUserFromContext();
 
         var allShopSpisok = globalSpisokService.getAllToDaySpisok(userModel);

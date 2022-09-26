@@ -1,6 +1,6 @@
 package com.example.shopinglist.exceptions;
 
-public class ExceptionRepeatElement extends RuntimeException{
+public class ExceptionRepeatElement extends RuntimeException {
     public ExceptionRepeatElement() {
     }
 

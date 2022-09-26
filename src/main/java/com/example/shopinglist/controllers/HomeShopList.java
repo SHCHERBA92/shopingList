@@ -55,7 +55,7 @@ public class HomeShopList {
     @PostMapping("/{id}/buyGood/{idGood}")
     public String buyCurrentGood(@PathVariable("id") Long id,
                                  @PathVariable("idGood") Long idGood,
-                                 Model model){
+                                 Model model) {
         var goodToByu = serviceGoods.getGoodById(idGood);
         exchangeGoodRoleOfStatus(goodToByu, RoleOfStatus.BUY);
         return "redirect:/shopList/{id}";
@@ -63,8 +63,8 @@ public class HomeShopList {
 
     @PostMapping("/{id}/cancelGood/{idGood}")
     public String cancelCurrentGood(@PathVariable("id") Long id,
-                                 @PathVariable("idGood") Long idGood,
-                                 Model model){
+                                    @PathVariable("idGood") Long idGood,
+                                    Model model) {
         var goodToByu = serviceGoods.getGoodById(idGood);
         exchangeGoodRoleOfStatus(goodToByu, RoleOfStatus.READY_BUY);
         return "redirect:/shopList/{id}";

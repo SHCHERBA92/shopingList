@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class InstructionController {
 
     @GetMapping()
-    String getInstruction(){
+    String getInstruction() {
         return "instruction";
     }
 }

@@ -27,7 +27,7 @@ public class Converter {
         return modelMapper.map(userProfileDTO, UserProfile.class);
     }
 
-    public static AuthUserDTO convertAuthUserModelT0DTO(AuthUserModel model){
+    public static AuthUserDTO convertAuthUserModelT0DTO(AuthUserModel model) {
         return modelMapper.map(model, AuthUserDTO.class);
     }
 }
