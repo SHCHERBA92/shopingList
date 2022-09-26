@@ -10,10 +10,6 @@ import org.modelmapper.ModelMapper;
 public class Converter {
     private static ModelMapper modelMapper = new ModelMapper();
 
-//    public Converter() {
-//        this.modelMapper = new ModelMapper();
-//    }
-
     public static GoodsDTO converterGoodsModelToGoodsDTO(GoodsModel model) {
         return modelMapper.map(model, GoodsDTO.class);
     }

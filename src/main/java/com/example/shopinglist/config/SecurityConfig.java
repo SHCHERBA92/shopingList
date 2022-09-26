@@ -2,6 +2,7 @@ package com.example.shopinglist.config;
 
 import com.example.shopinglist.auth_model.CustomUserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -23,6 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/login", "/registry", "/registry/auth/*", "/auth/*", "/registry/*").permitAll()
+                .antMatchers(HttpMethod.POST,"http://localhost:8077/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")

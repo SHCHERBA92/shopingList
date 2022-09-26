@@ -1,11 +1,16 @@
 package com.example.shopinglist.controllers;
 
+import com.example.shopinglist.DTO.mail.Mail_DTO;
 import com.example.shopinglist.auth_model.AuthUserModel;
 import com.example.shopinglist.mail.service.MailSenderService;
+import com.example.shopinglist.services.ActiveProducerService;
 import com.example.shopinglist.services.AuthUserService;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -16,11 +21,13 @@ public class RegistryController {
 
     private final AuthUserService authUserService;
     private final MailSenderService mailSenderService;
+    private final ActiveProducerService activeProducerService;
 
 
-    public RegistryController(AuthUserService authUserService, MailSenderService mailSenderService) {
+    public RegistryController(AuthUserService authUserService, MailSenderService mailSenderService, ActiveProducerService activeProducerService) {
         this.authUserService = authUserService;
         this.mailSenderService = mailSenderService;
+        this.activeProducerService = activeProducerService;
     }
 
     @GetMapping
@@ -40,7 +47,12 @@ public class RegistryController {
 
                 String code = generateCode();
                 var currentUser = createNewUser(email, nickName, pass1, code);
-                mailSenderService.sendMail(email, "Подтверждение почты !", code);
+                Mail_DTO mailDto = Mail_DTO.builder()
+                        .mail(email)
+                        .code(code)
+                        .build();
+                activeProducerService.sendEmail(mailDto);
+
                 authUserService.addNewUser(currentUser);
 
                 model.addAttribute("email", email);
@@ -53,11 +65,16 @@ public class RegistryController {
             }
         }
 
-    @PostMapping("/auth/repiet_mail")
+    @PostMapping(value = "/auth/repiet_mail", produces = MediaType.APPLICATION_JSON_VALUE)
     public String postRepietOrCancelMailSend(@RequestParam String email,
                                              @RequestParam String code,
                                              Model model){
-        mailSenderService.sendMail(email, "Подтверждение почты !", code);
+        Mail_DTO mailDto = Mail_DTO.builder()
+                .mail(email)
+                .code(code)
+                .build();
+
+        activeProducerService.sendEmail(mailDto);
         model.addAttribute("email", email);
         model.addAttribute("code", code);
         return "page_send_mail";
